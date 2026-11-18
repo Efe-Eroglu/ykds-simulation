@@ -1,6 +1,3 @@
-import '@fontsource-variable/inter';
-import '../styles/base.css';
-import '../styles/site.css';
 import { EXAM_MINUTES, FIELDS, modById } from '../core/exam-config.js';
 import { isValidContent } from '../core/split.js';
 import { $, $$, h, toast, confirmDlg, fmtDate } from '../ui/dom.js';

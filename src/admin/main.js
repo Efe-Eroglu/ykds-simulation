@@ -1,6 +1,3 @@
-import '@fontsource-variable/inter';
-import '../styles/base.css';
-import '../styles/admin.css';
 import { $, $$, h, toast, confirmDlg } from '../ui/dom.js';
 import { hydrateIcons, icon } from '../ui/icons.js';
 import { mountThemeToggle } from '../ui/theme.js';

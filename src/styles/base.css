@@ -1,3 +1,5 @@
+@import '@fontsource-variable/inter';
+
 /* ================= Tasarım tokenları ================= */
 :root {
   color-scheme: light;
@@ -188,7 +190,7 @@ dialog p { color: var(--text-2); margin: 6px 0 18px; }
 @keyframes toastIn { from { opacity: 0; transform: translate(-50%, 8px); } }
 
 /* Logo */
-.logo { display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 10px; background: var(--grad); color: #fff; flex: none; box-shadow: 0 4px 12px -4px rgba(99, 102, 241, .6); }
+.logo { display: inline-block; width: 32px; height: 32px; border-radius: 9px; flex: none; box-shadow: 0 4px 12px -4px rgba(99, 102, 241, .6); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }

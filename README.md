@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="public/favicon.svg" width="72" alt="YKDS Deneme logosu">
+<img src="public/icons/icon-192.png" width="88" alt="YKDS Deneme logosu">
 
 # YKDS Deneme Sınavı
 
@@ -164,7 +164,10 @@ npm run dev             # gerçek Firebase + yerel /api → http://localhost:517
 
 ### 3. Denemeleri yükle
 
-`/admin.html` → giriş yap → **Yeni deneme** → `seed/deneme-1.json` dosyasını sürükle → **Kaydet**.
+```bash
+npm run seed
+```
+veya `/admin.html` → **Yeni deneme** → JSON dosyasını sürükle → **Kaydet**.
 
 ## Canlıya alma (Vercel)
 
@@ -230,7 +233,10 @@ Admin panelinde örnek JSON indirme ve yapay zekâ ile deneme üretme promptu bu
 │   ├── ui/                    DOM, ikon ve tema yardımcıları
 │   └── styles/                Tasarım tokenları, site ve panel stilleri
 ├── dev/mock/                  Firebase'siz geliştirme için sahte servisler
+├── assets/brand/logo.svg      Marka logosu (kaynak)
 ├── scripts/create-admin.mjs   İlk admin hesabını oluşturur
+├── scripts/build-icons.mjs    Logodan favicon, PWA ikonları ve OG görseli üretir
+├── scripts/seed.mjs           Örnek denemeleri Firestore'a yükler
 ├── tests/                     Birim testleri (node --test)
 ├── seed/                      Örnek denemeler
 ├── firestore.rules            Güvenlik kuralları
@@ -246,7 +252,9 @@ Admin panelinde örnek JSON indirme ve yapay zekâ ile deneme üretme promptu bu
 | `npm run build` | Üretim paketi (`dist/`) |
 | `npm run preview` | Üretim paketini yerelde önizleme |
 | `npm test` | Birim testleri |
-| `npm run create-admin -- <e-posta>` | Admin hesabı oluşturur veya mevcut hesabı admin yapar |
+| `npm run icons` | `assets/brand/logo.svg` kaynağından tüm ikonları yeniden üretir |
+| `npm run create-admin -- <e-posta> [--generate]` | Admin hesabı oluşturur (`--generate`: güçlü rastgele şifre) |
+| `npm run seed` | `seed/` klasöründeki denemeleri Firestore'a yükler |
 
 ## Bilinen sınırlar
 

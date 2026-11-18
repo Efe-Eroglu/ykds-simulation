@@ -5,13 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>YKDS Deneme Sınavı · Doktora Öncelikli Alanlar</title>
 <meta name="description" content="YÖK-YKDS doktora öncelikli alanlar sınavı için 80 soruluk, 120 dakikalık ücretsiz online deneme sınavları. Alan katsayılı puanlama, soru incelemesi ve yanlış takibi.">
-<meta name="theme-color" content="#6366f1">
+<meta name="theme-color" content="#4f46e5">
 <meta property="og:type" content="website">
 <meta property="og:title" content="YKDS Deneme Sınavı">
 <meta property="og:description" content="80 soru · 120 dakika · alan katsayılı puanlama. Ücretsiz online deneme sınavları.">
 <meta property="og:locale" content="tr_TR">
+<meta property="og:image" content="/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="YKDS Deneme Sınavı">
+<meta name="twitter:description" content="80 soru · 120 dakika · alan katsayılı puanlama. Ücretsiz online deneme sınavları.">
+<meta name="twitter:image" content="/og-image.png">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/icons/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 <script src="/theme-init.js"></script>
+<style>.hidden{display:none!important}</style>
+<link rel="stylesheet" href="/src/styles/base.css">
+<link rel="stylesheet" href="/src/styles/site.css">
 </head>
 <body>
 
@@ -20,7 +33,7 @@
 <!-- ANA SAYFA -->
 <section id="view-home" class="view">
   <header class="top">
-    <a class="brand" href="/"><span class="logo"><i data-icon="graduation" data-size="18"></i></span>YKDS <span class="brand-sub">Doktora Deneme Sınavı</span></a>
+    <a class="brand" href="/"><img class="logo" src="/favicon.svg" alt="" width="32" height="32">YKDS <span class="brand-sub">Doktora Deneme Sınavı</span></a>
     <button class="btn ghost icon-only theme-toggle" type="button"></button>
   </header>
 
@@ -115,7 +128,7 @@
 <!-- SINAV -->
 <section id="view-exam" class="view hidden">
   <header class="top exam-top">
-    <div class="brand small-brand"><span class="logo"><i data-icon="graduation" data-size="18"></i></span><span id="ex-title"></span></div>
+    <div class="brand small-brand"><img class="logo" src="/favicon.svg" alt="" width="32" height="32"><span id="ex-title"></span></div>
     <div id="timer" class="timer" role="timer" aria-label="Kalan süre"><i data-icon="clock" data-size="16"></i><span id="timer-text">120:00</span></div>
     <button class="btn ghost icon-only theme-toggle" type="button"></button>
     <button id="btn-finish" class="btn danger small" type="button">Sınavı Bitir</button>
@@ -147,7 +160,7 @@
 <!-- SONUÇ -->
 <section id="view-result" class="view hidden">
   <header class="top">
-    <div class="brand"><span class="logo"><i data-icon="trophy" data-size="18"></i></span>Sonuç <span id="res-title" class="brand-sub"></span></div>
+    <div class="brand"><img class="logo" src="/favicon.svg" alt="" width="32" height="32">Sonuç <span id="res-title" class="brand-sub"></span></div>
     <button class="btn ghost icon-only theme-toggle" type="button"></button>
     <button id="btn-home" class="btn small" type="button">Ana sayfa</button>
   </header>
