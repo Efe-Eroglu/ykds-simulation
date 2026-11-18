@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YKDS Deneme Sınavı · Doktora Öncelikli Alanlar</title>
+<meta name="description" content="YÖK-YKDS doktora öncelikli alanlar sınavı için 80 soruluk, 120 dakikalık ücretsiz online deneme sınavları. Alan katsayılı puanlama, soru incelemesi ve yanlış takibi.">
+<meta name="theme-color" content="#6366f1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="YKDS Deneme Sınavı">
+<meta property="og:description" content="80 soru · 120 dakika · alan katsayılı puanlama. Ücretsiz online deneme sınavları.">
+<meta property="og:locale" content="tr_TR">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script src="/theme-init.js"></script>
+</head>
+<body>
+
+<div id="banner" class="banner hidden" role="status"></div>
+
+<!-- ANA SAYFA -->
+<section id="view-home" class="view">
+  <header class="top">
+    <a class="brand" href="/"><span class="logo"><i data-icon="graduation" data-size="18"></i></span>YKDS <span class="brand-sub">Doktora Deneme Sınavı</span></a>
+    <button class="btn ghost icon-only theme-toggle" type="button"></button>
+  </header>
+
+  <main class="wrap">
+    <div class="hero">
+      <span class="eyebrow"><i data-icon="sparkles" data-size="14"></i> 2026 kılavuzuna uygun</span>
+      <h1>Sınava <em>gerçek koşullarda</em> hazırlan</h1>
+      <p>Alan katsayılı ağırlıklı puanını öğren. Sınav bitince her soruyu çözümüyle incele, yanlışlarını tekrar et.</p>
+      <div class="hero-facts">
+        <span><i data-icon="file" data-size="16"></i> 80 soru</span>
+        <span><i data-icon="clock" data-size="16"></i> 120 dakika</span>
+        <span><i data-icon="chart" data-size="16"></i> Alt test analizi</span>
+        <span><i data-icon="shield" data-size="16"></i> Ücretsiz, kayıt yok</span>
+      </div>
+    </div>
+
+    <div id="resume-box" class="card resume hidden"></div>
+    <div id="maint-box" class="card hidden"></div>
+
+    <nav class="tabs" role="tablist" aria-label="Bölümler">
+      <button class="tab active" data-tab="solve" role="tab" aria-selected="true">Sınava Gir</button>
+      <button class="tab" data-tab="results" role="tab" aria-selected="false">Sonuçlarım</button>
+      <button class="tab" data-tab="info" role="tab" aria-selected="false">Sınav Kuralları</button>
+    </nav>
+
+    <!-- Sınava gir -->
+    <div id="tab-solve" class="tabpane" role="tabpanel">
+      <div class="card">
+        <h2><span class="step">1</span>Doktora alanını seç</h2>
+        <p class="muted small">Seçtiğin alanın doğruları <b>2,25</b>, diğer 3 alan testinin doğruları <b>1,25</b> katsayısıyla çarpılır.</p>
+        <div id="field-list" class="choice-grid"></div>
+      </div>
+      <div class="card">
+        <div class="row between">
+          <h2><span class="step">2</span>Deneme seç</h2>
+          <button id="btn-refresh" class="btn small ghost" type="button" aria-label="Listeyi yenile"><i data-icon="refresh" data-size="15"></i> Yenile</button>
+        </div>
+        <div id="test-list" class="test-list" aria-live="polite"></div>
+      </div>
+      <div class="card start-card">
+        <div id="start-summary" class="muted">Devam etmek için alan ve deneme seç.</div>
+        <button id="btn-start" class="btn primary big" type="button" disabled>Sınavı Başlat (120 dk)</button>
+      </div>
+    </div>
+
+    <!-- Sonuçlarım -->
+    <div id="tab-results" class="tabpane hidden" role="tabpanel">
+      <div class="card">
+        <h2>Sınav geçmişim</h2>
+        <p class="muted small">Sonuçların yalnızca bu tarayıcıda saklanır; tarayıcı verilerini silersen kaybolur.</p>
+        <div id="hist-summary" class="stat-grid"></div>
+        <div id="hist-trend" class="trend" aria-label="Puan gelişimi"></div>
+        <div id="hist-list"></div>
+      </div>
+      <div id="wrong-box" class="card hidden">
+        <div class="row between wrap-row">
+          <h3>Tekrar çalışılacak sorular <span id="wrong-count" class="muted small"></span></h3>
+          <div class="row wrap-row">
+            <select id="wrong-filter" aria-label="Durum"><option value="wrong">Yanlışlarım</option><option value="blank">Boş bıraktıklarım</option><option value="both">Yanlış + Boş</option></select>
+            <select id="wrong-mod" aria-label="Modül"></select>
+          </div>
+        </div>
+        <p class="muted small">Her soru için en son çözdüğün durum esas alınır; sonradan doğru yaptığın sorular listeden çıkar.</p>
+        <div id="wrong-list"></div>
+      </div>
+    </div>
+
+    <!-- Bilgi -->
+    <div id="tab-info" class="tabpane hidden" role="tabpanel">
+      <div class="card">
+        <h2>Sınav yapısı (2026 Başvuru Kılavuzu)</h2>
+        <ul class="plain">
+          <li>80 soru, <b>120 dakika</b>, çoktan seçmeli (5 şık). Yanlışlar doğruyu götürmez.</li>
+          <li><b>Ortak Temel Test (40):</b> Matematik 8 · Olasılık/İstatistik 8 · Algoritmik Düşünme 12 · Bilimsel Akıl Yürütme 12</li>
+          <li><b>Alan Testi (40):</b> Bilişim Teknolojileri 10 · Siber Güvenlik 10 · Yapay Zekâ 10 · Donanım 10</li>
+          <li><b>Ağırlıklı Puan</b> = Ortak Temel doğru sayısı + (kendi alanın × 2,25) + (diğer 3 alan × 1,25). En yüksek: <b>100</b>.</li>
+          <li>Resmî sınav puanı, ağırlıklı puanın diğer adaylara göre 100 üzerinden dönüştürülmesidir; burada yalnızca ağırlıklı puanı görürsün. Başarı barı: 70 puan.</li>
+        </ul>
+        <h3>Klavye kısayolları</h3>
+        <p class="muted small"><kbd>A</kbd>–<kbd>E</kbd> veya <kbd>1</kbd>–<kbd>5</kbd> şık seç · <kbd>←</kbd> <kbd>→</kbd> önceki/sonraki · <kbd>F</kbd> işaretle · <kbd>Boşluk</kbd> şıkkı temizle</p>
+        <p class="muted small">Sınav sırasında sayfa kapanırsa veya yenilenirse süre ve cevapların korunur; ana sayfadan devam edebilirsin. Cevap anahtarı sınavı bitirene kadar sunucuda saklanır.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>Bu site bağımsız bir çalışma aracıdır; <b>ÖSYM veya YÖK ile bir bağlantısı yoktur</b>. Sorular özgündür ve resmî sınav sorusu değildir.</p>
+    <p>© <span id="year"></span> YKDS Deneme · <a href="/admin.html" rel="nofollow">Yönetici</a></p>
+  </footer>
+</section>
+
+<!-- SINAV -->
+<section id="view-exam" class="view hidden">
+  <header class="top exam-top">
+    <div class="brand small-brand"><span class="logo"><i data-icon="graduation" data-size="18"></i></span><span id="ex-title"></span></div>
+    <div id="timer" class="timer" role="timer" aria-label="Kalan süre"><i data-icon="clock" data-size="16"></i><span id="timer-text">120:00</span></div>
+    <button class="btn ghost icon-only theme-toggle" type="button"></button>
+    <button id="btn-finish" class="btn danger small" type="button">Sınavı Bitir</button>
+  </header>
+  <main class="exam-main">
+    <div class="qcol">
+      <div class="card qcard">
+        <div class="qmeta"><span id="q-num"></span><span id="q-mod" class="tag"></span><button id="btn-flag" class="btn small outline" type="button">⚑ İşaretle</button></div>
+        <div id="q-text" class="qtext"></div>
+        <div id="q-options" class="options"></div>
+        <div class="row between navrow">
+          <button id="btn-prev" class="btn" type="button"><i data-icon="arrowLeft" data-size="16"></i> Önceki</button>
+          <button id="btn-clear" class="btn ghost small" type="button">Temizle</button>
+          <button id="btn-next" class="btn primary" type="button">Sonraki <i data-icon="arrowRight" data-size="16"></i></button>
+        </div>
+      </div>
+    </div>
+    <aside class="pal card" aria-label="Soru listesi">
+      <div class="pal-head"><b>Sorular</b><span id="pal-stat" class="muted small"></span></div>
+      <div class="progress"><i id="pal-progress" style="width:0"></i></div>
+      <div id="palette" class="palette"></div>
+      <div class="legend">
+        <span><i class="dot ans"></i>Cevaplı</span><span><i class="dot flag"></i>İşaretli</span><span><i class="dot cur"></i>Şu an</span>
+      </div>
+    </aside>
+  </main>
+</section>
+
+<!-- SONUÇ -->
+<section id="view-result" class="view hidden">
+  <header class="top">
+    <div class="brand"><span class="logo"><i data-icon="trophy" data-size="18"></i></span>Sonuç <span id="res-title" class="brand-sub"></span></div>
+    <button class="btn ghost icon-only theme-toggle" type="button"></button>
+    <button id="btn-home" class="btn small" type="button">Ana sayfa</button>
+  </header>
+  <main class="wrap">
+    <div class="card score-card">
+      <div class="big-score"><div id="res-total">0</div><div class="muted">/ 100 ağırlıklı puan</div></div>
+      <div id="res-grid" class="stat-grid"></div>
+    </div>
+    <div class="card">
+      <h3>Alt test dağılımı</h3>
+      <div class="table-scroll"><table class="mini" id="res-table"></table></div>
+    </div>
+    <div class="card">
+      <div class="row between wrap-row">
+        <h3>Soru incelemesi</h3>
+        <div class="seg" id="res-filter">
+          <button type="button" data-f="all" class="active">Tümü</button><button type="button" data-f="wrong">Yanlış</button><button type="button" data-f="blank">Boş</button><button type="button" data-f="right">Doğru</button>
+        </div>
+      </div>
+      <div id="review"></div>
+    </div>
+  </main>
+</section>
+
+<div id="submitting" class="submitting hidden" role="alertdialog" aria-live="assertive">
+  <div class="card">
+    <div class="spinner" id="sub-spin"></div>
+    <b id="sub-title">Sınavın değerlendiriliyor…</b>
+    <span id="sub-msg" class="muted small">Cevapların sunucuya gönderiliyor.</span>
+    <button id="sub-retry" class="btn primary hidden" type="button">Tekrar dene</button>
+  </div>
+</div>
+
+<dialog id="dlg">
+  <form method="dialog">
+    <h3 id="dlg-title"></h3>
+    <p id="dlg-body"></p>
+    <div class="row end">
+      <button value="cancel" class="btn" id="dlg-cancel">Vazgeç</button>
+      <button value="ok" class="btn danger" id="dlg-ok">Evet</button>
+    </div>
+  </form>
+</dialog>
+<div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+<script type="module" src="/src/app/main.js"></script>
+</body>
+</html>

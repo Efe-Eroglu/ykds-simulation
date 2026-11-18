@@ -1,0 +1,1007 @@
+{
+ "name": "Örnek Deneme 2",
+ "author": "Hazır örnek",
+ "createdAt": 1794999999998,
+ "modules": [
+  {
+   "id": "matematik",
+   "questions": [
+    {
+     "question": "10 köşeli, her köşesinin derecesi 3 olan basit bir çizgenin kaç kenarı vardır?",
+     "options": [
+      "15",
+      "10",
+      "13",
+      "20",
+      "30"
+     ],
+     "answer": "A",
+     "explanation": "El sıkışma lemması: dereceler toplamı = 10·3 = 30 = 2·kenar sayısı, kenar sayısı 15."
+    },
+    {
+     "question": "A = [[2, 1, 0], [1, 3, 1], [0, 1, 2]] matrisi için det(2A) değeri kaçtır?",
+     "options": [
+      "64",
+      "16",
+      "32",
+      "128",
+      "8"
+     ],
+     "answer": "A",
+     "explanation": "det(A)=2(6-1)-1(2-0)=8; 3x3 matriste det(2A)=2^3·det(A)=64."
+    },
+    {
+     "question": "a = (k, k, 3) ve b = (k, -1, -2) vektörleri birbirine dik olduğuna göre, k'nın alabileceği değerlerin toplamı kaçtır?",
+     "options": [
+      "-1",
+      "5",
+      "6",
+      "1",
+      "-6"
+     ],
+     "answer": "D",
+     "explanation": "a·b = k² - k - 6 = 0 denkleminden k = 3 veya k = -2; toplam 1."
+    },
+    {
+     "question": "lim(x→0) (e^(3x) - 1) / sin(2x) limitinin değeri kaçtır?",
+     "options": [
+      "2/3",
+      "3/2",
+      "1",
+      "2",
+      "3"
+     ],
+     "answer": "B",
+     "explanation": "e^(3x)-1 ~ 3x ve sin(2x) ~ 2x olduğundan limit 3/2'dir (L'Hôpital ile de aynı)."
+    },
+    {
+     "question": "lim(x→∞) (1 + 2/x)^(3x) limitinin değeri aşağıdakilerden hangisidir?",
+     "options": [
+      "e^2",
+      "e^3",
+      "e^5",
+      "6",
+      "e^6"
+     ],
+     "answer": "E",
+     "explanation": "(1+2/x)^(x/2·6) → (e)^(2·3)=e^6."
+    },
+    {
+     "question": "f(x) = x²·ln x fonksiyonu için f'(e) değeri kaçtır?",
+     "options": [
+      "e",
+      "2e",
+      "3e",
+      "3e²",
+      "e²"
+     ],
+     "answer": "C",
+     "explanation": "f'(x)=2x ln x + x; f'(e)=2e+e=3e."
+    },
+    {
+     "question": "∫ (0'dan 1'e) x·e^(x²) dx integralinin değeri kaçtır?",
+     "options": [
+      "e - 1",
+      "e/2",
+      "(e + 1)/2",
+      "(e - 1)/2",
+      "(e² - 1)/2"
+     ],
+     "answer": "D",
+     "explanation": "u = x² ile du = 2x dx; (1/2)∫e^u du = (e-1)/2."
+    },
+    {
+     "question": "y = x² parabolü ile y = 2x doğrusu arasında kalan sınırlı bölgenin alanı kaç birim karedir?",
+     "options": [
+      "2/3",
+      "2",
+      "8/3",
+      "4/3",
+      "4"
+     ],
+     "answer": "D",
+     "explanation": "Kesişim x=0 ve x=2; alan = ∫(2x - x²)dx = 4 - 8/3 = 4/3."
+    }
+   ]
+  },
+  {
+   "id": "olasilik",
+   "questions": [
+    {
+     "question": "Her denemede başarı olasılığı 0,4 olan 5 bağımsız denemede tam 2 başarı elde etme olasılığı kaçtır?",
+     "options": [
+      "0,2592",
+      "0,3456",
+      "0,2304",
+      "0,3",
+      "0,4"
+     ],
+     "answer": "B",
+     "explanation": "Binom: C(5,2)·0,4²·0,6³ = 10·0,16·0,216 = 0,3456."
+    },
+    {
+     "question": "Bir testin puanları ortalaması 100, standart sapması 15 olan normal dağılıma uymaktadır. Puanı 130'dan yüksek olanların oranı yaklaşık kaçtır?",
+     "options": [
+      "%0,1",
+      "%5",
+      "%16",
+      "%2,3",
+      "%32"
+     ],
+     "answer": "D",
+     "explanation": "z=(130-100)/15=2; P(Z>2)≈0,0228 ≈ %2,3."
+    },
+    {
+     "question": "x = {1, 2, 3, 4, 5} ve y = {2, 4, 5, 4, 5} veri çifti için Pearson korelasyon katsayısı yaklaşık kaçtır?",
+     "options": [
+      "0,50",
+      "0,60",
+      "0,85",
+      "0,95",
+      "0,77"
+     ],
+     "answer": "E",
+     "explanation": "Sxy=6, Sxx=10, Syy=6; r = 6/√60 ≈ 0,77."
+    },
+    {
+     "question": "Bir şehirde yaz aylarında dondurma satışları ile boğulma vakaları arasında r = 0,85 korelasyon gözlenmiştir. Bu bulgunun en doğru yorumu aşağıdakilerden hangisidir?",
+     "options": [
+      "İki değişkeni birlikte artıran sıcaklık gibi üçüncü bir (karıştırıcı) değişken bulunabilir; korelasyon nedensellik göstermez.",
+      "Dondurma tüketimi boğulma riskini doğrudan artırmaktadır.",
+      "Boğulma vakaları dondurma satışlarını artırmaktadır.",
+      "Korelasyon 0,85 olduğundan değişkenler arasında kesin nedensel ilişki vardır.",
+      "Korelasyon yüksek olduğu için dondurma satışı yasaklanmalıdır."
+     ],
+     "answer": "A",
+     "explanation": "Korelasyon nedensellik değildir; sıcaklık gibi ortak bir etken her iki değişkeni de artırır."
+    },
+    {
+     "question": "{2, 4, 6, 8, 40} veri setindeki 40 değeri girişte hatalı yazılmıştır ve doğrusu 10'dur. Düzeltme sonrası ortalama ve medyan nasıl değişir?",
+     "options": [
+      "Ortalama 12'den 6'ya düşer, medyan 6'dan 8'e çıkar.",
+      "Ortalama değişmez, medyan 6'dan 8'e çıkar.",
+      "Ortalama 12'den 6'ya düşer, medyan 6 olarak değişmez.",
+      "Ortalama ve medyan değişmez.",
+      "Ortalama 12'den 8'e düşer, medyan değişmez."
+     ],
+     "answer": "C",
+     "explanation": "Yeni ortalama 30/5=6; medyan (sıralı ortanca değer) 6 kalır. Ortalama aykırı değere duyarlı, medyan dayanıklıdır."
+    },
+    {
+     "question": "İki tedavinin başarısı hasta ağırlığına göre şöyledir. Tedavi A: hafif vakalarda 9/10, ağır vakalarda 30/90. Tedavi B: hafif vakalarda 80/90, ağır vakalarda 2/10. Aşağıdaki yorumlardan hangisi doğrudur?",
+     "options": [
+      "B hem alt gruplarda hem toplamda daha başarılıdır.",
+      "A hem alt gruplarda hem toplamda daha başarılıdır.",
+      "Toplam başarı oranları A için %39, B için %82 olduğundan A kesinlikle daha kötüdür; alt grup bilgisi gereksizdir.",
+      "A her alt grupta daha başarılıdır ancak toplamda B'nin başarı oranı yüksektir; vaka karışımı farkı nedeniyle Simpson paradoksu oluşur.",
+      "İki tedavi arasında hiçbir fark yoktur."
+     ],
+     "answer": "D",
+     "explanation": "A: 9/10=0,90>80/90≈0,89 ve 30/90≈0,33>0,20. Toplam A=39/100, B=82/100. Alt grup yönü ile toplam yön ters: Simpson paradoksu."
+    },
+    {
+     "question": "Bir yatırımcı şu seçeneklerden birini seçecek: X: 0,5 olasılıkla +200 TL, 0,5 olasılıkla -40 TL; Y: 0,8 olasılıkla +100 TL, 0,2 olasılıkla -50 TL; Z: 0,25 olasılıkla +400 TL, 0,75 olasılıkla -20 TL; T: kesin +82 TL. Beklenen değeri en yüksek olan seçenek hangisidir?",
+     "options": [
+      "X",
+      "Y",
+      "T",
+      "Hepsinin beklenen değeri eşittir",
+      "Z"
+     ],
+     "answer": "E",
+     "explanation": "E(X)=80, E(Y)=70, E(Z)=100-15=85, E(T)=82; en yüksek Z."
+    },
+    {
+     "question": "Üç strateji (satırlar) ve üç doğa durumu için kazanç matrisi: S1 = (50, 30, -10), S2 = (40, 35, 20), S3 = (80, 10, -30). Karar verici kötümser (maximin, Wald) ölçütünü kullanırsa hangi stratejiyi seçer?",
+     "options": [
+      "S1",
+      "S3",
+      "S1 ve S3 eşit tercih edilir",
+      "Ölçüt olasılık bilinmeden uygulanamaz",
+      "S2"
+     ],
+     "answer": "E",
+     "explanation": "Satır minimumları: S1=-10, S2=20, S3=-30; bunların en büyüğü 20 ile S2."
+    }
+   ]
+  },
+  {
+   "id": "algoritma",
+   "questions": [
+    {
+     "question": "Aşağıdaki sözde kodun zaman karmaşıklığı nedir?\n```\nc = 0\ni = 1\nwhile i < n:\n    for j in range(n):\n        c += 1\n    i *= 2\n```",
+     "options": [
+      "Θ(n log n)",
+      "Θ(n)",
+      "Θ(n²)",
+      "Θ(log n)",
+      "Θ(n² log n)"
+     ],
+     "answer": "A",
+     "explanation": "Dış döngü i her turda ikiye katlandığından log n tur; iç döngü n adım. Toplam Θ(n log n)."
+    },
+    {
+     "question": "T(n) = 4T(n/2) + n² özyineleme bağıntısının çözümü (Master teoremi) aşağıdakilerden hangisidir?",
+     "options": [
+      "Θ(n²)",
+      "Θ(n log n)",
+      "Θ(n² log n)",
+      "Θ(n³)",
+      "Θ(n)"
+     ],
+     "answer": "C",
+     "explanation": "a=4, b=2, n^(log_b a)=n² = f(n) olduğundan 2. durum: Θ(n² log n)."
+    },
+    {
+     "question": "n = 12 için aşağıdaki kod çalıştırıldığında c değişkeninin son değeri kaçtır?\n```\nc = 0\nfor i in range(1, n+1):\n    for j in range(i, n+1, i):\n        c += 1\n```",
+     "options": [
+      "35",
+      "12",
+      "30",
+      "32",
+      "78"
+     ],
+     "answer": "A",
+     "explanation": "Her i için ⌊12/i⌋ adım: 12+6+4+3+2+2+1+1+1+1+1+1 = 35."
+    },
+    {
+     "question": "{1, 4, 6} birimlik madeni paralarla 8 birimi ödemek isteniyor. Her adımda en büyük uygun parayı seçen açgözlü (greedy) yöntemin kullandığı para sayısı, en az para sayısından kaç fazladır?",
+     "options": [
+      "0",
+      "2",
+      "3",
+      "1",
+      "4"
+     ],
+     "answer": "D",
+     "explanation": "Açgözlü: 6+1+1 = 3 para. Optimal: 4+4 = 2 para. Fark 1."
+    },
+    {
+     "question": "\"ABCBDAB\" ve \"BDCABA\" dizgilerinin en uzun ortak altdizisinin (LCS) uzunluğu kaçtır?",
+     "options": [
+      "2",
+      "3",
+      "5",
+      "6",
+      "4"
+     ],
+     "answer": "E",
+     "explanation": "Dinamik programlama tablosu sonucu 4 (örneğin BCBA)."
+    },
+    {
+     "question": "1000 elemanlı sıralı bir dizide ikili arama (binary search) en kötü durumda en fazla kaç döngü yinelemesi yapar?",
+     "options": [
+      "7",
+      "10",
+      "9",
+      "11",
+      "500"
+     ],
+     "answer": "B",
+     "explanation": "Her yineleme aralığı yarıya indirir; ⌊log₂1000⌋+1 = 10."
+    },
+    {
+     "question": "Aşağıdaki özyinelemeli fonksiyon için f(6) değeri kaçtır?\n```\ndef f(n):\n    if n <= 1:\n        return 1\n    return f(n-1) + f(n-2) + 1\n```",
+     "options": [
+      "25",
+      "13",
+      "21",
+      "20",
+      "33"
+     ],
+     "answer": "A",
+     "explanation": "f(0)=f(1)=1; f(2)=3, f(3)=5, f(4)=9, f(5)=15, f(6)=25."
+    },
+    {
+     "question": "Aşağıdaki fonksiyon g(89, 55) ile çağrıldığında, ilk çağrı dahil toplam kaç kez çalışır?\n```\ndef g(a, b):\n    if b == 0:\n        return a\n    return g(b, a % b)\n```",
+     "options": [
+      "4",
+      "6",
+      "9",
+      "10",
+      "11"
+     ],
+     "answer": "D",
+     "explanation": "(89,55),(55,34),(34,21),(21,13),(13,8),(8,5),(5,3),(3,2),(2,1),(1,0): 10 çağrı."
+    },
+    {
+     "question": "Aşağıdaki kod h(3) için çalıştırıldığında yazdırılan çıktı nedir?\n```\ndef h(n):\n    if n == 0:\n        return\n    h(n-1)\n    print(n, end=' ')\n    h(n-1)\n```",
+     "options": [
+      "3 2 1 1 2 3",
+      "1 2 3 1 2 3",
+      "1 1 2 1 1 2 3",
+      "3 2 1 3 2 1",
+      "1 2 1 3 1 2 1"
+     ],
+     "answer": "E",
+     "explanation": "h(1)=1; h(2)=1 2 1; h(3)=h(2) 3 h(2)=1 2 1 3 1 2 1."
+    },
+    {
+     "question": "[6, 3, 5, 1, 4, 2] dizisi kabarcık sıralaması (bubble sort) ile küçükten büyüğe sıralanırken toplam kaç yer değiştirme (swap) yapılır?",
+     "options": [
+      "8",
+      "11",
+      "9",
+      "10",
+      "15"
+     ],
+     "answer": "B",
+     "explanation": "Yer değiştirme sayısı ters çevrilme (inversion) sayısına eşittir: 6 için 5, 3 için 2, 5 için 3, 1 için 0, 4 için 1; toplam 11."
+    },
+    {
+     "question": "Pivot olarak son elemanın seçildiği Lomuto bölümleme (partition) işlemi [9, 4, 7, 3, 10, 5] dizisine bir kez uygulandıktan sonra dizi nasıl görünür?",
+     "options": [
+      "[4, 3, 5, 10, 9, 7]",
+      "[3, 4, 5, 7, 9, 10]",
+      "[4, 3, 5, 9, 10, 7]",
+      "[4, 9, 7, 3, 5, 10]",
+      "[5, 4, 7, 3, 10, 9]"
+     ],
+     "answer": "C",
+     "explanation": "Pivot 5; döngü sonunda dizi [4, 3, 7, 9, 10, 5] olur, pivot 7 ile yer değiştirir: [4, 3, 5, 9, 10, 7]."
+    },
+    {
+     "question": "Aşağıdaki sıralama algoritmalarından hangisi hem kararlıdır (stable) hem de en kötü durumda O(n log n) zamanda çalışır?",
+     "options": [
+      "Birleştirmeli sıralama (merge sort)",
+      "Hızlı sıralama (quick sort)",
+      "Yığın sıralaması (heap sort)",
+      "Seçmeli sıralama (selection sort)",
+      "Shell sıralaması"
+     ],
+     "answer": "A",
+     "explanation": "Merge sort kararlıdır ve her durumda O(n log n)'dir. Quick sort en kötü O(n²), heap/selection/shell kararlı değildir."
+    }
+   ]
+  },
+  {
+   "id": "bilimsel",
+   "questions": [
+    {
+     "question": "Bir araştırmacı, başka bir ekibin paylaştığı veri setini ve analiz kodunu çalıştırarak makaledeki sayısal sonuçların aynısını elde etmiştir. Bu durum en doğru biçimde nasıl adlandırılır?",
+     "options": [
+      "Çoğaltma / replikasyon (yeni veri toplayarak)",
+      "Dış geçerlik",
+      "Yeniden üretilebilirlik (reproducibility)",
+      "Yapı geçerliği",
+      "Örneklem temsil gücü"
+     ],
+     "answer": "C",
+     "explanation": "Aynı veri ve kodla aynı sonucun elde edilmesi reproducibility'dir; yeni veriyle yinelemek replikasyondur."
+    },
+    {
+     "question": "Bir araştırmacı birbirinden bağımsız 20 hipotez testini α = 0,05 düzeyinde yapmıştır ve hiçbir düzeltme uygulamamıştır. Tüm null hipotezler doğruysa, en az bir testte yanlış pozitif elde etme olasılığı yaklaşık kaçtır?",
+     "options": [
+      "%5",
+      "%20",
+      "%64",
+      "%36",
+      "%100"
+     ],
+     "answer": "C",
+     "explanation": "1 - 0,95^20 ≈ 0,64. Çoklu karşılaştırmalarda Bonferroni gibi düzeltmeler gerekir."
+    },
+    {
+     "question": "Hipotezlerin ve analiz planının veri toplanmadan önce açık bir kayıt sistemine yüklenmesi (ön kayıt) uygulamasının temel amacı aşağıdakilerden hangisidir?",
+     "options": [
+      "Örneklem büyüklüğünü artırarak p değerini küçültmek",
+      "Etik kurul onayı gereğini ortadan kaldırmak",
+      "Sonuçlar görüldükten sonra hipotez uydurma ve seçici raporlama gibi esnek analiz uygulamalarını sınırlamak",
+      "Hakem değerlendirmesini atlayarak yayın süresini kısaltmak",
+      "Çalışmanın olumlu sonuç vermesini garanti etmek"
+     ],
+     "answer": "C",
+     "explanation": "Ön kayıt, HARKing ve p-hacking'i azaltarak doğrulayıcı ile keşfedici analizleri ayırt etmeyi sağlar."
+    },
+    {
+     "question": "Bir çalışmada p = 0,03 bulunmuştur. Bu sonucun doğru yorumu aşağıdakilerden hangisidir?",
+     "options": [
+      "Null hipotezin doğru olma olasılığı %3'tür.",
+      "Alternatif hipotezin doğru olma olasılığı %97'dir.",
+      "Çalışma tekrarlandığında aynı sonucun çıkma olasılığı %97'dir.",
+      "Null hipotez doğru olsaydı, gözlenen veya daha uç bir sonucun elde edilme olasılığı %3'tür.",
+      "Bulunan etkinin pratikte büyük olduğu kanıtlanmıştır."
+     ],
+     "answer": "D",
+     "explanation": "p değeri, H0 doğruyken gözlenen veya daha uç verinin olasılığıdır; hipotezlerin olasılığı değildir."
+    },
+    {
+     "question": "İki yöntem arasındaki ortalama puan farkı 4,2 olarak bulunmuş ve bu farkın %95 güven aralığı [-0,5; 8,9] olarak verilmiştir. Aşağıdaki çıkarımlardan hangisi doğrudur?",
+     "options": [
+      "Fark kesinlikle 4,2'dir ve anlamlıdır.",
+      "Gerçek farkın aralık içinde olma olasılığı %95 olduğundan fark anlamlıdır.",
+      "Aralık geniş olduğundan örneklem kesinlikle çok büyüktür.",
+      "Aralık 0'ı içerdiğinden fark, 0,05 düzeyinde iki yönlü testte istatistiksel olarak anlamlı değildir.",
+      "Fark %95 olasılıkla pozitiftir."
+     ],
+     "answer": "D",
+     "explanation": "Güven aralığı 0'ı kapsıyorsa p > 0,05'tir; ancak aralığın geniş olması kesin bir sonuca varılamadığını gösterir."
+    },
+    {
+     "question": "10.000 katılımcılı bir çalışmada yeni bir eğitim yönteminin ortalama sınav puanını 100 üzerinden 0,1 puan artırdığı ve farkın p < 0,001 olduğu bildirilmiştir. En uygun yorum hangisidir?",
+     "options": [
+      "Yöntem çok etkilidir; tüm okullarda uygulanmalıdır.",
+      "Fark istatistiksel olarak anlamlıdır ancak etki büyüklüğü çok küçük olduğundan pratik önemi tartışmalıdır.",
+      "p çok küçük olduğundan etki büyüklüğü de büyüktür.",
+      "Örneklem büyük olduğundan sonuç hatalıdır.",
+      "p < 0,001 olduğundan sonuç nedensel olarak kanıtlanmıştır."
+     ],
+     "answer": "B",
+     "explanation": "Büyük örneklemde küçük farklar bile anlamlı çıkar; istatistiksel anlamlılık ile pratik anlamlılık ayrı değerlendirilir."
+    },
+    {
+     "question": "Bir makalenin özetinde \"ilaç, hastaların %40'ında iyileşme sağladı\" denmektedir. Makaledeki tabloda ise plasebo grubunda iyileşme oranı %35'tir. En doğru okuma hangisidir?",
+     "options": [
+      "İlacın etkisi 40 puandır.",
+      "İlaç, plaseboya göre %40 daha etkilidir.",
+      "İlaca atfedilebilecek net etki yaklaşık 5 puandır; özetteki rakam tek başına yanıltıcıdır.",
+      "Plasebo grubu önemsizdir.",
+      "İyileşenlerin tümü ilaç sayesinde iyileşmiştir."
+     ],
+     "answer": "C",
+     "explanation": "Etki, kontrol grubuna göre değerlendirilir: 40 - 35 = 5 puan fark."
+    },
+    {
+     "question": "Aşağıdakilerden hangisi \"yağmacı (predatory) dergi\" olabileceğine dair güçlü bir uyarı işaretidir?",
+     "options": [
+      "Derginin bir akademik derneğe bağlı olması",
+      "Makalelerin açık erişimli yayımlanması",
+      "Hakem raporlarının birkaç hafta sürmesi",
+      "Derginin DOI ve etik politikası bulundurması",
+      "Makale ücreti karşılığında çok kısa sürede, gerçek bir hakem değerlendirmesi olmadan yayın vaadi"
+     ],
+     "answer": "E",
+     "explanation": "Gerçek hakemlik olmaksızın hızlı yayın vaadi yağmacı yayıncılığın temel işaretidir; açık erişim tek başına sorun değildir."
+    },
+    {
+     "question": "Kesitsel (cross-sectional) bir ankette uyku süresi kısa olan öğrencilerin notları da düşük bulunmuştur. Yazarlar \"kısa uyku düşük başarıya yol açar\" sonucuna varmıştır. Bu çıkarım için en uygun eleştiri hangisidir?",
+     "options": [
+      "Örneklem öğrencilerden oluştuğu için hiçbir ilişki yorumlanamaz.",
+      "Anket kullanıldığı için çalışma bilimsel değildir.",
+      "Nedensellik, yalnızca p < 0,05 ise ileri sürülebilir.",
+      "Tek bir zaman noktasında ölçüm yapıldığından zamansal sıra ve karıştırıcı değişkenler kontrol edilemez; nedensellik iddiası aşırıdır.",
+      "Kesitsel çalışmalar yalnızca nitel veri üretir."
+     ],
+     "answer": "D",
+     "explanation": "Kesitsel tasarım ilişkiyi gösterir; yön ve nedenselliği göstermez."
+    },
+    {
+     "question": "Bir kurumun yıllık satış adetleri tabloda verilmiştir: 2020: 240, 2021: 300, 2022: 270, 2023: 351. Hangi ardışık yıl çiftinde yüzde artış en büyüktür ve kaçtır?",
+     "options": [
+      "2020-2021, %25",
+      "2020-2021, %60",
+      "2022-2023, %30",
+      "2022-2023, %81",
+      "2021-2022, %10"
+     ],
+     "answer": "C",
+     "explanation": "Artışlar: 2020-21 %25, 2021-22 %-10, 2022-23 (351-270)/270 = %30. En büyük 2022-2023."
+    },
+    {
+     "question": "İki ürünün memnuniyet puanlarını gösteren çubuk grafiğin y ekseni 90'dan başlamaktadır. Ürün P'nin çubuğu 2 birim, ürün Q'nun çubuğu 6 birim yüksekliğindedir (gerçek değerler 92 ve 96). Grafik hakkında hangisi doğrudur?",
+     "options": [
+      "Q gerçekte P'nin 3 katıdır.",
+      "Çubuk yükseklikleri oranı 3 kat görünür; gerçek oran 96/92 ≈ 1,04 olduğundan eksen kesilmesi farkı abartır.",
+      "Grafik doğrudur; çubuklar gerçek oranı gösterir.",
+      "Eksen kesilmesi farkı olduğundan küçük gösterir.",
+      "Gerçek oran 96/90 = 1,07 olup grafik ile uyumludur."
+     ],
+     "answer": "B",
+     "explanation": "Kesik eksen, çubuk uzunluklarının orantısını bozar: görsel oran 6/2=3, gerçek oran ≈1,04."
+    },
+    {
+     "question": "Bir salgında vaka sayılarını gösteren grafikte y ekseni logaritmik ölçeklidir ve veri noktaları yaklaşık olarak bir doğru üzerinde yer almaktadır. Bu durum neyi gösterir?",
+     "options": [
+      "Vaka sayısının her gün sabit miktarda arttığını",
+      "Vaka sayısının sabit kaldığını",
+      "Artışın yavaşladığını ve sıfıra yaklaştığını",
+      "Verilerin hatalı olduğunu",
+      "Vaka sayısının yaklaşık sabit oranla (üstel) arttığını"
+     ],
+     "answer": "E",
+     "explanation": "Log ölçekte doğru, y = a·b^x biçiminde üstel büyümeye karşılık gelir; sabit miktar artışı doğrusal ölçekte doğru olur."
+    }
+   ]
+  },
+  {
+   "id": "bilisim",
+   "questions": [
+    {
+     "question": "musteri tablosu (id, ad): (1,Ali), (2,Ayse), (3,Can), (4,Deniz); siparis tablosu (id, musteri_id, tutar): (1,1,100), (2,1,250), (3,2,80), (4,2,120), (5,2,60), (6,4,300) olsun.\n```\nSELECT m.ad, COUNT(s.id) AS adet, SUM(s.tutar) AS toplam\nFROM musteri m LEFT JOIN siparis s ON s.musteri_id = m.id\nGROUP BY m.ad\nHAVING COUNT(s.id) < 3\nORDER BY m.ad;\n```\nBu sorgu için aşağıdakilerden hangisi doğrudur?",
+     "options": [
+      "3 satır döner; Can için toplam NULL'dır.",
+      "3 satır döner; Can için toplam 0'dır.",
+      "2 satır döner; Can sonuçta yer almaz.",
+      "4 satır döner; Ayse de sonuçta yer alır.",
+      "Sorgu hata verir; HAVING içinde COUNT kullanılamaz."
+     ],
+     "answer": "A",
+     "explanation": "Ayse 3 sipariş olduğundan elenir; Ali, Can, Deniz kalır. Can'ın eşleşmesi yok: COUNT(s.id)=0, SUM(NULL)=NULL."
+    },
+    {
+     "question": "A(x) tablosunda 1, 2, 3, 4 değerleri; B(y) tablosunda 2 ve NULL değerleri vardır.\n```\nSELECT COUNT(*) FROM A WHERE x NOT IN (SELECT y FROM B);\n```\nBu sorgunun sonucu kaçtır?",
+     "options": [
+      "1",
+      "0",
+      "2",
+      "3",
+      "4"
+     ],
+     "answer": "B",
+     "explanation": "NOT IN listesinde NULL varsa x <> NULL ifadesi UNKNOWN olur; hiçbir satır koşulu sağlamaz, sonuç 0."
+    },
+    {
+     "question": "U(v) tablosunda 10, NULL, 20, NULL, 30 değerleri vardır. SELECT COUNT(*), COUNT(v), AVG(v) FROM U sorgusu hangi sonucu üretir?",
+     "options": [
+      "5, 5, 12",
+      "3, 3, 20",
+      "5, 3, 12",
+      "5, 3, 20",
+      "3, 5, 20"
+     ],
+     "answer": "D",
+     "explanation": "COUNT(*) tüm satırları (5), COUNT(v) ve AVG NULL olmayanları dikkate alır: 3 değer, ortalama 60/3=20."
+    },
+    {
+     "question": "Ağ bölünmesi (partition) sırasında çoğunluk grubunun dışında kalan düğümlerin isteklerini reddederek tutarlılığı koruyan bir dağıtık veritabanı CAP teoremine göre hangi sınıfa girer?",
+     "options": [
+      "CP",
+      "AP",
+      "CA",
+      "Hem tutarlılık hem erişilebilirlik tam garantili",
+      "Bölünme toleransı olmayan"
+     ],
+     "answer": "A",
+     "explanation": "Bölünme anında tutarlılık (C) korunup erişilebilirlik (A) feda edildiğinden CP'dir."
+    },
+    {
+     "question": "N = 5 kopyalı bir dağıtık depoda okuma kuorumu R ve yazma kuorumu W için, her okumanın son başarılı yazmayı görmesi (güçlü tutarlılık) hangi (R, W) çiftiyle garanti edilir?",
+     "options": [
+      "R = 2, W = 3",
+      "R = 3, W = 3",
+      "R = 1, W = 4",
+      "R = 2, W = 2",
+      "R = 1, W = 1"
+     ],
+     "answer": "B",
+     "explanation": "Güçlü tutarlılık için R + W > N gerekir: 3+3=6>5. Diğerlerinde toplam ≤ 5."
+    },
+    {
+     "question": "Git ile ilgili aşağıdaki ifadelerden hangisi doğrudur?",
+     "options": [
+      "rebase commit özetlerini (hash) değiştirmez.",
+      "merge her zaman doğrusal bir geçmiş üretir.",
+      "rebase, dalın commit'lerini yeni bir taban üzerine yeniden uygular ve yeni commit özetleri (hash) üretir; bu yüzden paylaşılmış dallarda önerilmez.",
+      "rebase yalnızca uzak depoda çalışır.",
+      "merge, birleştirilen dalın commit'lerini siler."
+     ],
+     "answer": "C",
+     "explanation": "Rebase geçmişi yeniden yazar; başkalarının kullandığı dallarda çakışma ve karışıklık yaratır."
+    },
+    {
+     "question": "Anlamsal sürümleme (SemVer) kullanan bir kütüphanenin güncel sürümü 2.4.7'dir. Geriye dönük uyumlu yeni bir işlev eklenmiş ve bazı hatalar düzeltilmiş, API'de bozucu değişiklik yapılmamıştır. Yeni sürüm numarası ne olmalıdır?",
+     "options": [
+      "2.4.8",
+      "2.5.0",
+      "3.0.0",
+      "2.5.7",
+      "3.5.0"
+     ],
+     "answer": "B",
+     "explanation": "Uyumlu yeni özellik MINOR'u artırır ve PATCH sıfırlanır: 2.5.0."
+    },
+    {
+     "question": "Aşağıdaki Python kodunun çıktısı nedir?\n```\ndef ekle(x, liste=[]):\n    liste.append(x)\n    return liste\n\na = ekle(1)\nb = ekle(2)\nprint(a, b)\n```",
+     "options": [
+      "[1] [2]",
+      "[1, 2] [1, 2]",
+      "[1] [1, 2]",
+      "[1, 2] [2]",
+      "Hata verir"
+     ],
+     "answer": "B",
+     "explanation": "Varsayılan liste bir kez oluşturulur ve çağrılar arasında paylaşılır; a ve b aynı nesnedir."
+    },
+    {
+     "question": "Bir formda yaş alanı 18 ile 65 arasındaki (sınırlar dahil) tam sayıları kabul etmektedir. Sınır değer analizine (boundary value analysis) göre aşağıdaki test girdilerinden hangisi en uygundur?",
+     "options": [
+      "17, 18, 65, 66",
+      "0, 40, 100, 200",
+      "18, 40, 65",
+      "19, 20, 64, 65",
+      "1, 17, 66, 120"
+     ],
+     "answer": "A",
+     "explanation": "Sınır değer analizi alt ve üst sınırın hemen altı, kendisi ve hemen üstünü test eder: 17, 18, 65, 66."
+    },
+    {
+     "question": "Aşağıdaki Python kodunun çıktısı nedir?\n```\ndef f(a):\n    a.append(len(a))\n    a = a + [9]\n    return a\n\nx = [1, 2]\ny = f(x)\nprint(x, y)\n```",
+     "options": [
+      "[1, 2] [1, 2, 9]",
+      "[1, 2, 2, 9] [1, 2, 2, 9]",
+      "[1, 2, 2] [1, 2, 9]",
+      "[1, 2, 2] [1, 2, 2, 9]",
+      "[1, 2] [1, 2, 2, 9]"
+     ],
+     "answer": "D",
+     "explanation": "append yerinde değişiklik yapar (x = [1,2,2]); a + [9] yeni liste oluşturur, x etkilenmez."
+    }
+   ]
+  },
+  {
+   "id": "siber",
+   "questions": [
+    {
+     "question": "Değeri 200.000 TL olan bir varlık için tek bir olayda kayıp oranı (exposure factor) %25 ve olayın yıllık gerçekleşme sıklığı (ARO) 0,4'tür. Yıllık beklenen kayıp (ALE) kaç TL'dir?",
+     "options": [
+      "5.000",
+      "50.000",
+      "20.000",
+      "80.000",
+      "200.000"
+     ],
+     "answer": "C",
+     "explanation": "SLE = 200.000 x 0,25 = 50.000; ALE = SLE x ARO = 50.000 x 0,4 = 20.000."
+    },
+    {
+     "question": "Bir sistemde kullanıcı gerçekleştirdiği işlemi sonradan yapmadığını iddia etmekte ve sistemde bunu çürütecek güvenilir kayıt bulunmamaktadır. STRIDE modeline göre bu tehdit hangi kategoridedir?",
+     "options": [
+      "Kimlik sahteciliği (Spoofing)",
+      "Veri değiştirme (Tampering)",
+      "Bilgi ifşası (Information disclosure)",
+      "Yetki yükseltme (Elevation of privilege)",
+      "Inkâr (Repudiation)"
+     ],
+     "answer": "E",
+     "explanation": "İşlemin inkâr edilebilmesi Repudiation'dır; imzalı ve değiştirilemez denetim kayıtları ile azaltılır."
+    },
+    {
+     "question": "Bir güvenlik duvarında kurallar sırayla ve ilk eşleşmeye göre işlenmektedir (hepsi TCP): Kural 1: izin ver, kaynak 10.0.0.0/24, hedef port 443. Kural 2: reddet, kaynak 10.0.0.0/16, tüm portlar. Kural 3: izin ver, kaynak herhangi, hedef port 80. Eşleşme yoksa reddedilir. Paketler: P1: 10.0.0.15 → 443; P2: 10.0.4.20 → 443; P3: 10.0.4.20 → 80; P4: 172.16.0.5 → 80; P5: 172.16.0.5 → 443. Hangi paketler geçirilir?",
+     "options": [
+      "P1, P3 ve P4",
+      "P1, P2 ve P4",
+      "P1 ve P4",
+      "P4 ve P5",
+      "Yalnızca P1"
+     ],
+     "answer": "C",
+     "explanation": "P1: Kural 1 izin. P2, P3: Kural 2 reddeder (10.0.4.x, /16 içinde). P4: Kural 3 izin. P5: eşleşme yok, örtük red."
+    },
+    {
+     "question": "Durumsuz (stateless) paket filtreleme ile durum denetimli (stateful) güvenlik duvarı arasındaki en temel fark aşağıdakilerden hangisidir?",
+     "options": [
+      "Stateful güvenlik duvarı yalnızca UDP trafiğini filtreler.",
+      "Stateless filtreleme paket içeriğini (payload) şifreler.",
+      "Stateless filtreleme bağlantı tablosu tutar, stateful tutmaz.",
+      "Stateful güvenlik duvarı yalnızca uygulama katmanında çalışır.",
+      "Stateful güvenlik duvarı bağlantı durum tablosu tutar ve izin verilmiş bir bağlantının dönüş trafiğine otomatik izin verir."
+     ],
+     "answer": "E",
+     "explanation": "Stateful denetim, bağlantı durumlarını izleyerek gelen yanıt paketlerini ilişkilendirir; stateless her paketi bağımsız değerlendirir."
+    },
+    {
+     "question": "192.168.10.130/26 adresini içeren alt ağın yayın (broadcast) adresi aşağıdakilerden hangisidir?",
+     "options": [
+      "192.168.10.191",
+      "192.168.10.129",
+      "192.168.10.159",
+      "192.168.10.190",
+      "192.168.10.255"
+     ],
+     "answer": "A",
+     "explanation": "/26 blok boyutu 64; ağ 192.168.10.128, yayın adresi 192.168.10.191."
+    },
+    {
+     "question": "Bir uygulamada sorgu şu şekilde oluşturulmaktadır: \"SELECT * FROM users WHERE name = '\" + girdi + \"'\". SQL enjeksiyonuna karşı en etkili önlem hangisidir?",
+     "options": [
+      "Doğrulamayı yalnızca istemci tarafında JavaScript ile yapmak",
+      "Tek tırnak karakterlerini kara listeyle silmeye çalışmak",
+      "Veritabanı hata mesajlarını ayrıntılı göstermek",
+      "Parolaları MD5 ile saklamak",
+      "Parametreli sorgular (prepared statements) kullanmak"
+     ],
+     "answer": "E",
+     "explanation": "Parametreli sorgular girdiyi koddan ayırır; kara liste ve istemci doğrulaması atlatılabilir."
+    },
+    {
+     "question": "Yığın tabanlı tampon taşmasında dönüş adresinin üzerine yazılmasını, fonksiyon geri dönmeden önce tespit etmeyi amaçlayan derleyici düzeyindeki koruma hangisidir?",
+     "options": [
+      "Parola tuzlama (salting)",
+      "Yığın kanaryası (stack canary)",
+      "İçerik güvenlik politikası (CSP)",
+      "CORS politikası",
+      "Oturum çerezi Secure özniteliği"
+     ],
+     "answer": "B",
+     "explanation": "Kanarya değeri yığında yerel değişkenler ile dönüş adresi arasına konur; değişmişse program sonlandırılır."
+    },
+    {
+     "question": "Saldırganın bir yorum alanına yazdığı betik veritabanında saklanmakta ve sayfayı açan her kullanıcının tarayıcısında çalışmaktadır. Bu saldırı türü hangisidir?",
+     "options": [
+      "Yansıtılmış (reflected) XSS",
+      "Kalıcı (stored) XSS",
+      "DOM tabanlı XSS",
+      "CSRF",
+      "SQL enjeksiyonu"
+     ],
+     "answer": "B",
+     "explanation": "Betik sunucuda kalıcı olarak saklanıp tüm ziyaretçilere sunulduğundan stored XSS'tir."
+    },
+    {
+     "question": "DNS amplifikasyon saldırısında saldırgan 60 baytlık sahte kaynaklı sorgu gönderir, sunucu kurbana 3000 baytlık yanıt yollar. Saldırganın toplam gönderdiği trafik 2 Mbit/s ise kurbana ulaşan trafik yaklaşık kaç Mbit/s olur?",
+     "options": [
+      "2",
+      "50",
+      "100",
+      "150",
+      "3000"
+     ],
+     "answer": "C",
+     "explanation": "Kuvvetlendirme faktörü 3000/60 = 50; 2 x 50 = 100 Mbit/s."
+    },
+    {
+     "question": "Oturum açmış bir kullanıcının tarayıcısının, kötü niyetli bir sitedeki gizli form aracılığıyla banka sitesine istemsiz istek göndermesi (CSRF) saldırısına karşı en uygun önlem hangisidir?",
+     "options": [
+      "Parola karmaşıklık kurallarını sıkılaştırmak",
+      "SQL sorgularını parametrelendirmek",
+      "Girdi uzunluğunu sınırlamak",
+      "Anti-CSRF belirteci (token) ve SameSite çerez özniteliği kullanmak",
+      "Disk şifrelemesini etkinleştirmek"
+     ],
+     "answer": "D",
+     "explanation": "CSRF, çerezlerin otomatik gönderilmesini sömürür; tahmin edilemez token ve SameSite çerezler bunu engeller."
+    }
+   ]
+  },
+  {
+   "id": "yapayzeka",
+   "questions": [
+    {
+     "question": "Bir ikili sınıflandırıcının hata matrisi: TP = 40, FP = 10, FN = 20, TN = 130. F1 skoru yaklaşık kaçtır?",
+     "options": [
+      "0,67",
+      "0,80",
+      "0,84",
+      "0,90",
+      "0,73"
+     ],
+     "answer": "E",
+     "explanation": "Kesinlik = 40/50 = 0,80; duyarlılık = 40/60 ≈ 0,67; F1 = 2·0,8·0,667/(1,467) ≈ 0,73."
+    },
+    {
+     "question": "1000 örnekli bir veri setinde 20 örnek pozitiftir. Model her örneği negatif olarak tahmin etmektedir. Bu modelin doğruluk (accuracy) ve pozitif sınıf duyarlılığı (recall) nedir?",
+     "options": [
+      "Doğruluk 0,98; duyarlılık 0",
+      "Doğruluk 0,98; duyarlılık 0,98",
+      "Doğruluk 0,50; duyarlılık 0",
+      "Doğruluk 0,02; duyarlılık 1",
+      "Doğruluk 1; duyarlılık 0"
+     ],
+     "answer": "A",
+     "explanation": "980/1000 doğru tahmin: 0,98. Hiçbir pozitif yakalanmadığından recall 0. Dengesiz veride accuracy yanıltıcıdır."
+    },
+    {
+     "question": "Bir sinir ağı eğitiminde 20. dönemden (epoch) sonra eğitim kaybı azalmaya devam ederken doğrulama kaybı artmaya başlamıştır. Bu durum ve uygun önlem hangisidir?",
+     "options": [
+      "Aşırı öğrenme; erken durdurma, düzenlileştirme veya daha fazla veri kullanılabilir.",
+      "Eksik öğrenme; model kapasitesi azaltılmalıdır.",
+      "Eksik öğrenme; eğitim durdurulmalı, öğrenme oranı sıfırlanmalıdır.",
+      "Veri sızıntısı yoktur; model başarılıdır ve eğitime devam edilmelidir.",
+      "Aşırı öğrenme; ağa daha fazla katman eklenmelidir."
+     ],
+     "answer": "A",
+     "explanation": "Eğitim/doğrulama kaybı ayrışması aşırı öğrenmeyi gösterir; erken durdurma, dropout, L2 gibi yöntemler uygulanır."
+    },
+    {
+     "question": "Girişi x = (1, 2) olan iki katmanlı ağın gizli katmanında ReLU kullanılmaktadır. h1 = ReLU(2·x1 - 1·x2 + 1), h2 = ReLU(-1·x1 + 0,5·x2 - 1) ve çıkış y = 3·h1 + 2·h2 - 0,5'tir. y kaçtır?",
+     "options": [
+      "2,5",
+      "0,5",
+      "1,5",
+      "4,5",
+      "-0,5"
+     ],
+     "answer": "A",
+     "explanation": "h1 = ReLU(2-2+1)=1; h2 = ReLU(-1+1-1)=ReLU(-1)=0; y = 3+0-0,5 = 2,5."
+    },
+    {
+     "question": "L(w) = (w - 5)² kayıp fonksiyonu üzerinde w = 2 noktasından, öğrenme oranı 0,1 ile bir adım gradyan inişi uygulanırsa yeni w değeri kaç olur?",
+     "options": [
+      "1,4",
+      "0,8",
+      "3,2",
+      "2,6",
+      "5"
+     ],
+     "answer": "D",
+     "explanation": "Gradyan = 2(w-5) = -6; w_yeni = 2 - 0,1·(-6) = 2,6."
+    },
+    {
+     "question": "Sigmoid aktivasyon fonksiyonunun türevinin en büyük değeri 0,25'tir. Beş ardışık sigmoid katmanından geri yayılımda, yalnızca aktivasyon türevlerinden gelen çarpanın alabileceği en büyük değer kaçtır?",
+     "options": [
+      "0,25",
+      "0,0625",
+      "0,0156",
+      "≈ 0,00098",
+      "0,0039"
+     ],
+     "answer": "D",
+     "explanation": "0,25⁵ = 1/1024 ≈ 0,00098: gradyan katman sayısıyla üstel olarak küçülür (kaybolan gradyan)."
+    },
+    {
+     "question": "Transformer mimarisinde dikkat (attention) hesabında nokta çarpım skorlarının √d_k değerine bölünmesinin temel amacı nedir?",
+     "options": [
+      "Anahtar boyutu büyüdükçe artan skorların softmax'i doygunluğa sokup gradyanları çok küçültmesini önlemek",
+      "Hesaplamayı doğrusal karmaşıklığa indirmek",
+      "Sorgu ve anahtar vektörlerini eşitlemek",
+      "Dizi sırası bilgisini modele eklemek",
+      "Çıktı olasılıklarını sıfıra yaklaştırmak"
+     ],
+     "answer": "A",
+     "explanation": "Ölçekleme yapılmazsa büyük skorlar softmax'te keskin dağılım ve kaybolan gradyan üretir."
+    },
+    {
+     "question": "Standart (tam) öz-dikkat içeren bir Transformer'da dizi uzunluğu 2048 tokenden 8192 tokene çıkarıldığında, dikkat skor matrisinin boyutu (bellek ve işlem) yaklaşık kaç kat artar?",
+     "options": [
+      "4",
+      "16",
+      "8",
+      "32",
+      "64"
+     ],
+     "answer": "B",
+     "explanation": "Dikkat matrisi n x n boyutludur; uzunluk 4 kat artınca 4² = 16 kat artar."
+    },
+    {
+     "question": "Tek bir tahmin için her özelliğin katkısını oyun kuramındaki Shapley değerlerine dayanarak hesaplayan açıklanabilirlik yöntemi hangisidir?",
+     "options": [
+      "PCA",
+      "k-ortalamalar (k-means)",
+      "Dropout",
+      "ROC eğrisi",
+      "SHAP"
+     ],
+     "answer": "E",
+     "explanation": "SHAP, özelliklerin bireysel tahmine katkısını Shapley değerleriyle atfeder."
+    },
+    {
+     "question": "Bir kredi modeli A grubunda 100 başvurunun 30'unu, B grubunda 60 başvurunun 12'sini onaylamıştır. Olumlu karar oranlarının düşüğünün yükseğe bölümü olarak tanımlanan farklı etki (disparate impact) oranı ve %80 kuralı sonucu nedir?",
+     "options": [
+      "0,67; %80 kuralı sağlanır",
+      "1,50; %80 kuralı sağlanır",
+      "0,67; %80 kuralı sağlanmaz (ihlal)",
+      "0,90; %80 kuralı sağlanır",
+      "0,20; %80 kuralı sağlanır"
+     ],
+     "answer": "C",
+     "explanation": "Oranlar: 0,30 ve 0,20; 0,20/0,30 ≈ 0,67 < 0,80: kural ihlal edilir."
+    }
+   ]
+  },
+  {
+   "id": "donanim",
+   "questions": [
+    {
+     "question": "L1 önbellek erişim süresi 1 ns, L1 ıskalama oranı %10; L2 erişim süresi 10 ns, L2 yerel ıskalama oranı %20; ana bellek erişimi 100 ns'dir. Ortalama bellek erişim süresi (AMAT) kaç ns'dir?",
+     "options": [
+      "2",
+      "3",
+      "6",
+      "11",
+      "4"
+     ],
+     "answer": "E",
+     "explanation": "AMAT = 1 + 0,1·(10 + 0,2·100) = 1 + 0,1·30 = 4 ns."
+    },
+    {
+     "question": "32 bit adres uzayına sahip bir işlemcide 32 KB'lık, 64 bayt blok boyutlu, doğrudan eşlemeli (direct-mapped) önbelleğin etiket (tag) alanı kaç bittir?",
+     "options": [
+      "15",
+      "16",
+      "17",
+      "18",
+      "21"
+     ],
+     "answer": "C",
+     "explanation": "Blok ofseti 6 bit, 512 satır için indeks 9 bit; etiket = 32 - 6 - 9 = 17."
+    },
+    {
+     "question": "Bir UART bağlantısı 115200 baud hızında 8N1 formatında (1 başlangıç, 8 veri, parite yok, 1 bitiş biti) çalışmaktadır. 1152 baytlık veri yaklaşık kaç ms'de iletilir?",
+     "options": [
+      "10",
+      "100",
+      "80",
+      "125",
+      "1000"
+     ],
+     "answer": "B",
+     "explanation": "Bayt başına 10 bit: 11520 bit / 115200 bit/s = 0,1 s = 100 ms."
+    },
+    {
+     "question": "Bir ana denetleyiciye 3 bağımlı (slave) aygıt bağlanacaktır. Ortak hatlar ve ayrı çip seçme hatları dikkate alındığında, SPI ve I2C için gereken toplam sinyal hattı sayısı sırasıyla nedir?",
+     "options": [
+      "SPI: 4, I2C: 2",
+      "SPI: 6, I2C: 5",
+      "SPI: 6, I2C: 2",
+      "SPI: 3, I2C: 3",
+      "SPI: 9, I2C: 2"
+     ],
+     "answer": "C",
+     "explanation": "SPI: SCK, MOSI, MISO + 3 CS = 6 hat; I2C: yalnızca SDA ve SCL, adresleme ile 2 hat."
+    },
+    {
+     "question": "İş yükünün %90'ı mükemmel biçimde paralelleştirilebilir, %10'u ardışıktır. Amdahl yasasına göre 8 işlemcide elde edilecek hızlanma yaklaşık kaçtır?",
+     "options": [
+      "3,2",
+      "5,0",
+      "7,2",
+      "4,7",
+      "8,0"
+     ],
+     "answer": "D",
+     "explanation": "Hızlanma = 1/(0,1 + 0,9/8) = 1/0,2125 ≈ 4,7."
+    },
+    {
+     "question": "4 düğümlü bir kümede her düğümde 2 işlemci, her işlemcide 16 çekirdek bulunmaktadır. Çekirdekler 2,5 GHz'de çalışır ve çevrim başına 16 kayan nokta işlemi (FLOP) yapar. Kuramsal tepe başarım kaç TFLOPS'tur?",
+     "options": [
+      "2,56",
+      "0,64",
+      "10,24",
+      "20,48",
+      "5,12"
+     ],
+     "answer": "E",
+     "explanation": "4·2·16 = 128 çekirdek x 2,5 GHz x 16 = 5120 GFLOPS = 5,12 TFLOPS."
+    },
+    {
+     "question": "Üç periyodik göreve ait (hesaplama süresi, periyot) değerleri: T1 = (1, 4), T2 = (2, 6), T3 = (1, 8) ms'dir. Rate Monotonic zamanlama için Liu-Layland sınırı n(2^(1/n) - 1) ile değerlendirildiğinde aşağıdakilerden hangisi doğrudur?",
+     "options": [
+      "Kullanım ≈ 0,71, sınır ≈ 0,69; zamanlanabilirlik garanti edilemez.",
+      "Kullanım ≈ 0,71, sınır ≈ 0,78; görev kümesinin zamanlanabilirliği garanti edilir.",
+      "Kullanım ≈ 1,2 olduğundan zamanlanamaz.",
+      "Kullanım ≈ 0,71, sınır 1; ancak yalnızca EDF kullanılabilir.",
+      "Kullanım ≈ 0,50 olduğundan zamanlanabilirlik test edilemez."
+     ],
+     "answer": "B",
+     "explanation": "U = 0,25 + 0,333 + 0,125 ≈ 0,708 ≤ 3(2^(1/3)-1) ≈ 0,780 olduğundan RM ile zamanlanabilir."
+    },
+    {
+     "question": "Gerçek zamanlı bir sistemde yüksek öncelikli görev, düşük öncelikli görevin tuttuğu kilidi beklerken orta öncelikli bir görev düşük öncelikli görevi kesmekte ve yüksek öncelikli görev gecikmektedir. Bu soruna karşı standart çözüm hangisidir?",
+     "options": [
+      "Öncelik miras alma (priority inheritance) protokolü",
+      "Kilidi tutan görevin önceliğini düşürmek",
+      "Orta öncelikli görevin zaman dilimini uzatmak",
+      "Önbellek boyutunu artırmak",
+      "Kesmeleri kalıcı olarak kapatmak"
+     ],
+     "answer": "A",
+     "explanation": "Kilidi tutan görev, beklemekte olan yüksek öncelikli görevin önceliğini geçici olarak miras alır (Mars Pathfinder olayı)."
+    },
+    {
+     "question": "MQTT protokolünde mesajın alıcıya en az bir kez ulaşması garanti edilir (tekrarlı teslim olabilir). Bu hizmet kalitesi düzeyi hangisidir?",
+     "options": [
+      "QoS 0",
+      "QoS 2",
+      "Retain bayrağı",
+      "Last Will mesajı",
+      "QoS 1"
+     ],
+     "answer": "E",
+     "explanation": "QoS 0: en fazla bir kez; QoS 1: en az bir kez; QoS 2: tam olarak bir kez."
+    },
+    {
+     "question": "200 sensörün her biri saniyede 50 baytlık bir ölçüm üretmektedir. Uç (edge) ağ geçidi ölçümleri her 10 saniyede tek bir 400 baytlık özet pakete indirip buluta göndermektedir. Buluta giden veri hızı yaklaşık kaç kat azalır?",
+     "options": [
+      "10",
+      "250",
+      "25",
+      "100",
+      "400"
+     ],
+     "answer": "B",
+     "explanation": "Ham: 200·50 = 10.000 B/s; özet: 400/10 = 40 B/s; oran 250."
+    }
+   ]
+  }
+ ]
+}

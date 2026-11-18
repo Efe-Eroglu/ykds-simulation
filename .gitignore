@@ -1,0 +1,28 @@
+# Bağımlılıklar ve çıktılar
+node_modules/
+dist/
+*.log
+
+# Ortam değişkenleri ve gizli anahtarlar — ASLA commit'leme
+.env
+.env.*
+!.env.example
+*-firebase-adminsdk-*.json
+serviceAccount*.json
+service-account*.json
+*.pem
+*.key
+*.p12
+
+# Firebase / Vercel yerel durumu
+.firebaserc
+.firebase/
+firebase-debug.log
+firestore-debug.log
+.vercel/
+
+# Yerel / araç dosyaları
+_eski-surum/
+.claude/
+.DS_Store
+Thumbs.db

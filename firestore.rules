@@ -1,0 +1,76 @@
+rules_version = '2';
+// YKDS Deneme — Firestore güvenlik kuralları
+// Varsayılan: her şey kapalı. Yalnızca aşağıda açıkça izin verilen işlemler yapılabilir.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function isAdmin() {
+      return signedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+    function isPublished(id) {
+      return get(/databases/$(database)/documents/tests/$(id)).data.published == true;
+    }
+    function validMeta(d) {
+      return d.keys().hasOnly(['name', 'author', 'published', 'questionCount', 'createdAt', 'updatedAt'])
+        && d.name is string && d.name.size() >= 3 && d.name.size() <= 100
+        && d.author is string && d.author.size() <= 50
+        && d.published is bool
+        && d.questionCount == 80;
+    }
+
+    // Yönetici listesi — yalnızca Firebase Console'dan yönetilir.
+    match /admins/{uid} {
+      allow get: if signedIn() && request.auth.uid == uid;
+      allow list, write: if false;
+    }
+
+    // Deneme özeti — yayındakiler herkese açık.
+    match /tests/{id} {
+      allow read: if resource.data.published == true || isAdmin();
+      allow create, update: if isAdmin() && validMeta(request.resource.data);
+      allow delete: if isAdmin();
+    }
+
+    // Soru metinleri ve şıklar (CEVAP İÇERMEZ) — deneme yayındaysa okunabilir.
+    match /testContents/{id} {
+      allow get: if isAdmin() || isPublished(id);
+      allow list: if isAdmin();
+      allow create, update: if isAdmin() && request.resource.data.keys().hasOnly(['modules']);
+      allow delete: if isAdmin();
+    }
+
+    // Cevap anahtarı ve çözümler — istemcide YALNIZCA admin; öğrenciye sunucu (Admin SDK) teslimden sonra verir.
+    match /testKeys/{id} {
+      allow read: if isAdmin();
+      allow create, update: if isAdmin()
+        && request.resource.data.keys().hasOnly(['answers', 'explanations'])
+        && request.resource.data.answers is string && request.resource.data.answers.size() == 80;
+      allow delete: if isAdmin();
+    }
+
+    // Çözüm istatistikleri — yalnızca sunucu yazar, admin okur.
+    match /testStats/{id} {
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+
+    // Tek kullanımlık sınav oturumları — yalnızca sunucu.
+    match /examTokens/{id} {
+      allow read, write: if false;
+    }
+
+    // Site ayarları — herkes okur, admin yazar.
+    match /settings/{doc} {
+      allow read: if true;
+      allow write: if isAdmin() && doc == 'site'
+        && request.resource.data.keys().hasOnly(['announcement', 'maintenance', 'copyProtection', 'showExplanations', 'updatedAt'])
+        && request.resource.data.copyProtection is bool
+        && request.resource.data.showExplanations is bool;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

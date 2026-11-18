@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Yönetim Paneli · YKDS Deneme</title>
+<meta name="theme-color" content="#6366f1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script src="/theme-init.js"></script>
+</head>
+<body class="admin">
+
+<!-- Açılış -->
+<div id="boot" class="boot"><div class="spinner"></div></div>
+
+<!-- Kimlik ekranları -->
+<div id="auth" class="auth hidden">
+  <aside class="auth-art">
+    <div class="auth-brand"><span class="logo"><i data-icon="graduation" data-size="18"></i></span> YKDS Deneme</div>
+    <div class="auth-copy">
+      <h1>Denemelerini tek yerden yönet.</h1>
+      <p>Deneme yükle, yayınla, istatistikleri takip et ve site ayarlarını yönet.</p>
+      <ul>
+        <li><i data-icon="shield" data-size="16"></i> Cevap anahtarı sunucuda saklanır</li>
+        <li><i data-icon="chart" data-size="16"></i> Çözüm ve soru zorluk istatistikleri</li>
+        <li><i data-icon="lock" data-size="16"></i> Rol tabanlı erişim, güvenlik kuralları</li>
+      </ul>
+    </div>
+    <div class="auth-foot">© <span class="year"></span> YKDS Deneme</div>
+  </aside>
+  <main class="auth-main">
+    <button class="btn ghost icon-only theme-toggle auth-theme" type="button"></button>
+
+    <form id="login-form" class="auth-card" novalidate>
+      <h2>Yönetici girişi</h2>
+      <p class="muted small">Devam etmek için hesabınla giriş yap.</p>
+      <label class="lbl">E-posta
+        <input id="in-email" type="email" autocomplete="username" required>
+      </label>
+      <label class="lbl">Şifre
+        <span class="pw-wrap">
+          <input id="in-pass" type="password" autocomplete="current-password" required>
+          <button type="button" class="pw-eye" data-target="in-pass" aria-label="Şifreyi göster"><i data-icon="eye" data-size="16"></i></button>
+        </span>
+      </label>
+      <div id="login-err" class="form-err" role="alert"></div>
+      <button id="btn-login" class="btn primary full" type="submit">Giriş yap</button>
+      <button id="btn-reset" class="btn ghost small full" type="button">Şifremi unuttum</button>
+    </form>
+
+    <div id="auth-denied" class="auth-card hidden">
+      <div class="auth-icon bad"><i data-icon="lock" data-size="22"></i></div>
+      <h2>Yönetici yetkin yok</h2>
+      <p class="muted small">Yetki vermek için Firebase Console → Firestore → <code>admins</code> koleksiyonuna, belge kimliği aşağıdaki UID olan bir belge ekle.</p>
+      <pre class="code" id="denied-uid"></pre>
+      <button id="btn-denied-logout" class="btn full" type="button">Farklı hesapla giriş yap</button>
+    </div>
+
+    <div id="auth-config" class="auth-card hidden">
+      <div class="auth-icon warn"><i data-icon="alert" data-size="22"></i></div>
+      <h2>Yapılandırma eksik</h2>
+      <p class="muted small">Firebase ortam değişkenleri tanımlı değil. Yerelde <code>.env</code>, Vercel'de Environment Variables bölümünü doldur (bkz. <code>.env.example</code>).</p>
+    </div>
+  </main>
+</div>
+
+<!-- Uygulama kabuğu -->
+<div id="shell" class="shell hidden">
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-brand"><span class="logo"><i data-icon="graduation" data-size="18"></i></span><div><b>YKDS Deneme</b><small>Yönetim Paneli</small></div></div>
+    <nav class="sb-nav" aria-label="Ana menü">
+      <div class="sb-label">Genel</div>
+      <a href="#/overview" data-route="overview"><i data-icon="dashboard"></i> Genel bakış</a>
+      <div class="sb-label">İçerik</div>
+      <a href="#/tests" data-route="tests"><i data-icon="file"></i> Denemeler <span class="sb-count" id="nav-count"></span></a>
+      <a href="#/tests/new" data-route="editor"><i data-icon="plus"></i> Yeni deneme</a>
+      <div class="sb-label">Sistem</div>
+      <a href="#/settings" data-route="settings"><i data-icon="settings"></i> Ayarlar</a>
+      <a href="/" target="_blank" rel="noopener"><i data-icon="external"></i> Siteyi görüntüle</a>
+    </nav>
+    <div class="sb-user">
+      <div class="avatar" id="sb-avatar"></div>
+      <div class="sb-user-info"><b id="sb-email"></b><small>Yönetici</small></div>
+      <button class="btn ghost icon-only small" id="btn-logout" type="button" aria-label="Çıkış yap" title="Çıkış yap"><i data-icon="logout" data-size="16"></i></button>
+    </div>
+  </aside>
+  <div class="sb-backdrop" id="sb-backdrop"></div>
+
+  <div class="main">
+    <header class="topbar">
+      <button class="btn ghost icon-only menu-btn" id="btn-menu" type="button" aria-label="Menüyü aç"><i data-icon="menu"></i></button>
+      <div class="crumbs"><span class="muted">Panel</span><span class="muted">/</span><b id="crumb"></b></div>
+      <div class="topbar-actions">
+        <span id="conn" class="pill info hidden"></span>
+        <button class="btn ghost icon-only theme-toggle" type="button"></button>
+      </div>
+    </header>
+    <main class="content" id="content">
+      <section class="page" data-page="overview"></section>
+      <section class="page" data-page="tests"></section>
+      <section class="page" data-page="editor"></section>
+      <section class="page" data-page="settings"></section>
+    </main>
+  </div>
+</div>
+
+<!-- Yan panel (istatistik) -->
+<aside id="drawer" class="drawer" aria-hidden="true">
+  <div class="drawer-head"><b id="drawer-title"></b><button class="btn ghost icon-only small" id="drawer-close" type="button" aria-label="Kapat"><i data-icon="x" data-size="16"></i></button></div>
+  <div class="drawer-body" id="drawer-body"></div>
+</aside>
+<div id="drawer-backdrop" class="drawer-backdrop"></div>
+
+<dialog id="dlg">
+  <form method="dialog">
+    <h3 id="dlg-title"></h3>
+    <p id="dlg-body"></p>
+    <div class="row end">
+      <button value="cancel" class="btn" id="dlg-cancel">Vazgeç</button>
+      <button value="ok" class="btn danger" id="dlg-ok">Evet</button>
+    </div>
+  </form>
+</dialog>
+<div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+<script type="module" src="/src/admin/main.js"></script>
+</body>
+</html>
