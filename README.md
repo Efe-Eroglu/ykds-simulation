@@ -114,7 +114,7 @@ Denemeyi bitirdiğinde sadece puanını değil, **hangi alt testte ne kadar iyi 
 
 ## Deneme hazırlayanlar için
 
-Denemeler, yöneticilerin kullandığı ayrı bir **yönetim panelinden** yüklenir ve yayınlanır. Panelde her denemenin kaç kez çözüldüğü, ortalama puanı ve öğrencilerin en çok zorlandığı sorular görülebilir.
+Denemeler, yöneticilerin kullandığı ayrı bir **yönetim panelinden** yüklenir ve yayınlanır. Tüm denemeler ortak bir JSON formatında hazırlanır; format, soru yazım kuralları ve yapay zekâ ile üretim için hazır prompt **[Deneme Hazırlama Kuralları](docs/SORU-HAZIRLAMA-KURALLARI.md)** belgesindedir. Panelde her denemenin kaç kez çözüldüğü, ortalama puanı ve öğrencilerin en çok zorlandığı sorular görülebilir.
 
 <table>
   <tr>

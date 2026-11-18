@@ -104,6 +104,8 @@ veya `/admin.html` → **Yeni deneme** → JSON dosyasını sürükle → **Kayd
 
 ## Deneme JSON biçimi
 
+> Ayrıntılı format ve yazım kuralları: [SORU-HAZIRLAMA-KURALLARI.md](SORU-HAZIRLAMA-KURALLARI.md)
+
 ```json
 {
   "name": "Deneme 3",
