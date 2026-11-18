@@ -1,267 +1,142 @@
 <div align="center">
 
-<img src="public/icons/icon-192.png" width="88" alt="YKDS Deneme logosu">
+<img src="public/icons/icon-192.png" width="96" alt="YKDS Deneme logosu">
 
 # YKDS Deneme Sınavı
 
-**YÖK-YKDS doktora öncelikli alanlar sınavı için online deneme platformu**
+### Doktora öncelikli alanlar sınavına gerçek koşullarda hazırlan
 
-80 soru · 120 dakika · alan katsayılı ağırlıklı puan · sunucu taraflı puanlama
+80 soru · 120 dakika · alan katsayılı puan · çözümlü inceleme · **ücretsiz, kayıt yok**
 
-[![CI](https://github.com/Efe-Eroglu/ykds-simulation/actions/workflows/ci.yml/badge.svg)](https://github.com/Efe-Eroglu/ykds-simulation/actions/workflows/ci.yml)
-![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
-![Firebase](https://img.shields.io/badge/Firebase-Firestore%20%2B%20Auth-FFCA28?logo=firebase&logoColor=black)
-![Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?logo=vercel&logoColor=white)
-![Node](https://img.shields.io/badge/Node-%E2%89%A520-339933?logo=node.js&logoColor=white)
+<a href="https://ykds-simulation.vercel.app"><img src="https://img.shields.io/badge/Hemen_dene-ykds--simulation.vercel.app-4F46E5?style=for-the-badge" alt="Siteyi aç"></a>
 
-<img src="docs/screenshots/site-home-light.jpg" alt="Öğrenci sitesi ana sayfa" width="100%">
+<br><br>
+
+<img src="docs/screenshots/site-home-light.jpg" alt="YKDS Deneme ana sayfa" width="100%">
 
 </div>
 
 ---
 
-## İçindekiler
+## Bu site ne işe yarar?
 
-- [Özellikler](#özellikler)
-- [Ekran görüntüleri](#ekran-görüntüleri)
-- [Mimari](#mimari)
-- [Güvenlik ve kopya önleme](#güvenlik-ve-kopya-önleme)
-- [Kurulum](#kurulum)
-- [Canlıya alma (Vercel)](#canlıya-alma-vercel)
-- [Deneme JSON biçimi](#deneme-json-biçimi)
-- [Proje yapısı](#proje-yapısı)
-- [Komutlar](#komutlar)
-- [Bilinen sınırlar](#bilinen-sınırlar)
+**YKDS Deneme**, YÖK-YKDS doktora öncelikli alanlar sınavına hazırlanan adaylar için hazırlanmış bir **online deneme sınavı** platformudur. 2026 başvuru kılavuzundaki sınav yapısını birebir uygular: aynı soru sayısı, aynı süre, aynı alt testler ve aynı puan hesabı.
 
-## Özellikler
+Denemeyi bitirdiğinde sadece puanını değil, **hangi alt testte ne kadar iyi olduğunu** ve **her sorunun doğru cevabını çözümüyle** görürsün. Yanlış yaptığın sorular tekrar çalışabilmen için bir listede toplanır.
 
-### Öğrenci sitesi
-- **Gerçek sınav deneyimi:** 80 soru, 120 dakika geri sayım, soru paleti, işaretleme, klavye kısayolları (A–E, ←/→, F)
-- **Kesintiye dayanıklı:** sayfa kapansa veya yenilense de süre ve cevaplar korunur
-- **Sunucu taraflı puanlama:** cevap anahtarı sınav teslim edilene kadar tarayıcıya hiç inmez
-- **Ayrıntılı sonuç:** ağırlıklı puan, alt test tablosu, çözümlü soru incelemesi
-- **Kişisel geçmiş:** puan trendi ve "en son yanlış yaptığın sorular" tekrar listesi
-- **Kayıt gerektirmez**, açık/koyu tema, mobil uyumlu
+## Nasıl kullanılır?
 
-### Yönetim paneli (`/admin`)
-- **Dashboard:** toplam deneme ve soru sayısı, çözüm sayısı, ortalama puan, en popüler denemeler, sistem durumu
-- **Deneme yönetimi:** arama, filtreleme, yayınla/gizle, düzenle, JSON indir, sil
-- **İstatistik paneli:** alan dağılımı ve doğru cevaplanma oranına göre **en zor 10 soru**
-- **Düzenleyici:** sürükle-bırak JSON yükleme, canlı modül kontrol listesi, hata listesi, `Ctrl+S` ile kaydetme, kaydedilmemiş değişiklik uyarısı
-- **Ayarlar:** duyuru bandı, bakım modu, kopyalama koruması, çözümleri gösterme, tema, otomatik çıkış, şifre değiştirme
-
-## Ekran görüntüleri
+| | |
+|---|---|
+| **1. Alanını seç** | Bilişim Teknolojileri, Siber Güvenlik, Yapay Zekâ veya Donanım. Kendi alanının soruları daha yüksek katsayıyla sayılır. |
+| **2. Bir deneme seç** | Listeden çözmek istediğin denemeyi seç. |
+| **3. Sınavı başlat** | 120 dakikalık süre başlar. Soruları istediğin sırayla çöz, emin olmadıklarını işaretle, sonra geri dön. |
+| **4. Sonucunu incele** | Ağırlıklı puanını, alt test tablonu ve her sorunun çözümünü gör. |
 
 <table>
   <tr>
-    <td width="50%"><img src="docs/screenshots/admin-overview-light.jpg" alt="Admin genel bakış (açık tema)"><p align="center"><sub>Genel bakış · açık tema</sub></p></td>
-    <td width="50%"><img src="docs/screenshots/admin-overview-dark.jpg" alt="Admin genel bakış (koyu tema)"><p align="center"><sub>Genel bakış · koyu tema</sub></p></td>
+    <td width="50%"><img src="docs/screenshots/site-exam-dark.jpg" alt="Sınav ekranı"><p align="center"><sub><b>Sınav ekranı</b> · soru paleti, işaretleme, geri sayım</sub></p></td>
+    <td width="50%"><img src="docs/screenshots/site-result-dark.jpg" alt="Sonuç ekranı"><p align="center"><sub><b>Sonuç</b> · ağırlıklı puan ve alt test dağılımı</sub></p></td>
   </tr>
   <tr>
-    <td><img src="docs/screenshots/admin-tests-dark.jpg" alt="Deneme listesi"><p align="center"><sub>Deneme yönetimi</sub></p></td>
-    <td><img src="docs/screenshots/admin-stats-dark.jpg" alt="Deneme istatistikleri"><p align="center"><sub>Alan dağılımı ve en zor sorular</sub></p></td>
-  </tr>
-  <tr>
-    <td><img src="docs/screenshots/admin-editor-light.jpg" alt="Deneme düzenleyici"><p align="center"><sub>Düzenleyici ve canlı doğrulama</sub></p></td>
-    <td><img src="docs/screenshots/admin-settings-light.jpg" alt="Ayarlar"><p align="center"><sub>Site ayarları</sub></p></td>
-  </tr>
-  <tr>
-    <td><img src="docs/screenshots/admin-security-light.jpg" alt="Görünüm ve güvenlik ayarları"><p align="center"><sub>Tema seçimi ve güvenlik</sub></p></td>
-    <td><img src="docs/screenshots/admin-login.jpg" alt="Yönetici girişi"><p align="center"><sub>Yönetici girişi</sub></p></td>
-  </tr>
-  <tr>
-    <td><img src="docs/screenshots/site-exam-dark.jpg" alt="Sınav ekranı"><p align="center"><sub>Sınav ekranı</sub></p></td>
-    <td><img src="docs/screenshots/site-result-dark.jpg" alt="Sonuç ekranı"><p align="center"><sub>Sonuç ve alt test dağılımı</sub></p></td>
-  </tr>
-  <tr>
-    <td><img src="docs/screenshots/site-home-dark.jpg" alt="Alan ve deneme seçimi"><p align="center"><sub>Alan ve deneme seçimi · koyu tema</sub></p></td>
-    <td><img src="docs/screenshots/site-review-light.jpg" alt="Soru incelemesi"><p align="center"><sub>Çözümlü soru incelemesi</sub></p></td>
+    <td><img src="docs/screenshots/site-review-light.jpg" alt="Soru incelemesi"><p align="center"><sub><b>Çözümlü inceleme</b> · doğru cevap ve açıklama</sub></p></td>
+    <td><img src="docs/screenshots/site-home-dark.jpg" alt="Koyu tema"><p align="center"><sub><b>Koyu tema</b> · gözü yormayan çalışma</sub></p></td>
   </tr>
 </table>
 
-> Görüntüler `npm run dev:mock` ile örnek veriyle alınmıştır.
+## Öne çıkanlar
 
-## Mimari
+- 🎯 **Gerçek sınav yapısı:** 80 soru, 120 dakika, 5 şıklı sorular; yanlışlar doğruyu götürmez
+- 🧮 **Resmî puan hesabı:** Ortak Temel + kendi alanın × 2,25 + diğer alanlar × 1,25 (en fazla 100)
+- 📊 **Alt test analizi:** 8 alt testte doğru, yanlış ve boş sayıların ve puanın
+- 💡 **Çözümlü inceleme:** her sorunun doğru cevabı ve açıklaması
+- 🔁 **Tekrar listesi:** en son yanlış yaptığın ve boş bıraktığın sorular tek yerde
+- 📈 **Gelişim takibi:** çözdüğün tüm denemelerin puan geçmişi
+- ⌨️ **Klavye kısayolları:** <kbd>A</kbd>–<kbd>E</kbd> şık seç · <kbd>←</kbd> <kbd>→</kbd> soru değiştir · <kbd>F</kbd> işaretle
+- 💾 **Kaldığın yerden devam:** sayfa kapansa ya da internet gitse bile süre ve cevapların korunur
+- 🌗 **Açık ve koyu tema**, telefon ve tablet uyumlu
+- 🔒 **Adil sınav:** cevap anahtarı sınavı bitirene kadar sunucuda kalır, tarayıcıdan görülemez
 
-```mermaid
-flowchart LR
-  subgraph Tarayıcı
-    S[Öğrenci sitesi<br/>index.html]
-    A[Yönetim paneli<br/>admin.html]
-  end
-  subgraph Vercel
-    ST[Statik dosyalar<br/>Vite build]
-    API["/api/exam/start<br/>/api/exam/submit"]
-  end
-  subgraph Firebase
-    AU[Authentication]
-    FS[(Firestore)]
-  end
-  S -- "sorular (cevapsız)" --> FS
-  S -- "oturum aç / teslim et" --> API
-  API -- "Admin SDK: cevap anahtarı, istatistik" --> FS
-  A -- "e-posta + şifre" --> AU
-  A -- "CRUD (kurallarla korunur)" --> FS
-```
+## Sınav yapısı
 
-| Koleksiyon | İçerik | Okuma | Yazma |
-|---|---|---|---|
-| `tests/{id}` | ad, hazırlayan, yayın durumu | yayındaysa herkes | admin |
-| `testContents/{id}` | soru metni ve şıklar (**cevap yok**) | yayındaysa herkes | admin |
-| `testKeys/{id}` | cevap anahtarı ve çözümler | **yalnızca admin** | admin |
-| `testStats/{id}` | çözüm sayısı, ortalama, soru bazlı doğru sayısı | admin | yalnızca sunucu |
-| `examTokens/{id}` | tek kullanımlık sınav oturumları | — | yalnızca sunucu |
-| `settings/site` | duyuru, bakım, sınav güvenliği | herkes | admin |
-| `admins/{uid}` | yönetici listesi | kullanıcının kendisi | yalnızca konsol |
+| Bölüm | Alt test | Soru |
+|---|---|:---:|
+| **Ortak Temel Test** | Matematiksel Temeller | 8 |
+| | Olasılık, İstatistik ve Veri Okuryazarlığı | 8 |
+| | Algoritmik Düşünme ve Problem Çözme | 12 |
+| | Bilimsel Akıl Yürütme ve Araştırma Okuryazarlığı | 12 |
+| **Alan Testi** | Bilişim Teknolojileri | 10 |
+| | Siber Güvenlik | 10 |
+| | Yapay Zekâ ve Akıllı Sistemler | 10 |
+| | Donanım ve Bilgisayar Sistemleri | 10 |
+| | **Toplam** | **80** |
 
-## Güvenlik ve kopya önleme
+> **Ağırlıklı puan** = Ortak Temel doğruları + (kendi alanının doğruları × 2,25) + (diğer 3 alanın doğruları × 1,25)
+>
+> Resmî sınav puanı, ağırlıklı puanın diğer adaylara göre dönüştürülmesiyle bulunur. Bu sitede ağırlıklı puanını görürsün.
 
-| Katman | Önlem |
-|---|---|
-| **Cevap anahtarı** | Sorular ve cevaplar ayrı koleksiyonlarda tutulur. Öğrenci yalnızca cevapsız içeriği okuyabilir. Anahtarı sadece sunucu (Admin SDK) okur ve yalnızca teslimden sonra gönderir. |
-| **Sınav oturumu** | `/api/exam/start` HMAC-SHA256 ile imzalı bir belirteç verir. Teslimde imza, deneme ve süre doğrulanır. Belirteç tek kullanımlıktır, tekrar gönderimler istatistiği şişiremez. |
-| **API** | Yalnızca POST kabul edilir, farklı siteden gelen istekler reddedilir. Hız sınırı, 16 KB gövde sınırı, `no-store` önbellek ve sıkı girdi doğrulaması uygulanır. |
-| **Veritabanı** | Varsayılan olarak her şey kapalıdır. Rol tabanlı erişim (`admins` koleksiyonu) ve şema doğrulaması `firestore.rules` dosyasındadır. |
-| **Arayüz** | Sınav sırasında metin seçme, kopyalama, sağ tık, sürükleme ve yazdırma engellenir (ayarlardan kapatılabilir). |
-| **Admin oturumu** | Hareketsizlikte otomatik çıkış, art arda hatalı girişte bekleme süresi, şifre değişikliğinde yeniden doğrulama. Şifre sıfırlama, hesabın var olup olmadığını belli etmez. |
-| **HTTP başlıkları** | Sıkı CSP, HSTS, `X-Frame-Options: DENY`, COOP, Permissions-Policy. `/admin` için `noindex` ve `no-store`. |
-| **Gizli anahtarlar** | Sunucu anahtarları (`FIREBASE_SERVICE_ACCOUNT`, `EXAM_TOKEN_SECRET`) yalnızca Vercel ortamında durur ve istemci paketine girmez. |
+## Sık sorulan sorular
 
-## Kurulum
+<details>
+<summary><b>Üye olmam gerekiyor mu?</b></summary>
+<br>Hayır. Siteyi açıp hemen sınava başlayabilirsin. Hiçbir kişisel bilgi istenmez.
+</details>
 
-### Gereksinimler
-- Node.js 20 veya üzeri
-- Bir Firebase projesi (ücretsiz Spark planı yeterli)
+<details>
+<summary><b>Ücretli mi?</b></summary>
+<br>Hayır, tamamen ücretsiz.
+</details>
 
-### 1. Projeyi çalıştır
+<details>
+<summary><b>Sonuçlarım nerede saklanıyor?</b></summary>
+<br>Sadece kendi tarayıcında. Bu yüzden başka bir cihazda görünmez. Tarayıcı verilerini silersen geçmişin de silinir.
+</details>
 
-```bash
-git clone https://github.com/Efe-Eroglu/ykds-simulation.git
-cd ykds-simulation
-npm install
-npm run dev:mock      # Firebase olmadan, örnek veriyle arayüz → http://localhost:5173
-```
+<details>
+<summary><b>Sınavın ortasında sayfa kapanırsa ne olur?</b></summary>
+<br>Siteyi tekrar açtığında ana sayfada "Devam eden sınavın var" kutusu çıkar. Süre ve cevapların olduğu gibi korunur.
+</details>
 
-### 2. Firebase'i yapılandır
+<details>
+<summary><b>Süre bitince ne oluyor?</b></summary>
+<br>Sınav otomatik olarak teslim edilir ve sonucun gösterilir. Boş bıraktığın sorular boş sayılır.
+</details>
 
-1. **Firestore Database → Create database** → bölge `europe-west3` (Frankfurt), *production mode*
-2. **Authentication → Get started → Email/Password** sağlayıcısını etkinleştir
-3. **Proje ayarları → Genel → Web uygulaması ekle** → `firebaseConfig` değerlerini `.env` dosyasına yaz
-4. **Proje ayarları → Hizmet hesapları → Yeni özel anahtar oluştur** → JSON'u tek satır olarak `FIREBASE_SERVICE_ACCOUNT` değişkenine yaz
-5. Güvenlik kurallarını yükle:
-   ```bash
-   npx firebase-tools deploy --only firestore:rules --project <proje-id>
-   ```
-6. İlk admin hesabını oluştur (şifreyi sen yazarsın, hiçbir yere kaydedilmez):
-   ```bash
-   npm run create-admin -- admin@ornek.com
-   ```
+<details>
+<summary><b>Sorular gerçek ÖSYM soruları mı?</b></summary>
+<br>Hayır. Tüm sorular bu platform için özgün olarak hazırlanmıştır ve sınav kılavuzundaki konu başlıklarını kapsar.
+</details>
 
-```bash
-cp .env.example .env    # değerleri doldur
-npm run dev             # gerçek Firebase + yerel /api → http://localhost:5173
-```
+<details>
+<summary><b>Telefondan çözebilir miyim?</b></summary>
+<br>Evet. Site telefon ve tablette de çalışır. Yine de gerçek sınava en yakın deneyim için bilgisayar önerilir.
+</details>
 
-### 3. Denemeleri yükle
+## Deneme hazırlayanlar için
 
-```bash
-npm run seed
-```
-veya `/admin.html` → **Yeni deneme** → JSON dosyasını sürükle → **Kaydet**.
+Denemeler, yöneticilerin kullandığı ayrı bir **yönetim panelinden** yüklenir ve yayınlanır. Panelde her denemenin kaç kez çözüldüğü, ortalama puanı ve öğrencilerin en çok zorlandığı sorular görülebilir.
 
-## Canlıya alma (Vercel)
+<table>
+  <tr>
+    <td width="50%"><img src="docs/screenshots/admin-overview-light.jpg" alt="Yönetim paneli"><p align="center"><sub>Genel bakış</sub></p></td>
+    <td width="50%"><img src="docs/screenshots/admin-stats-dark.jpg" alt="Deneme istatistikleri"><p align="center"><sub>En zor sorular ve alan dağılımı</sub></p></td>
+  </tr>
+</table>
 
-1. <https://vercel.com/new> → bu GitHub deposunu içe aktar (Framework: **Vite**, otomatik algılanır)
-2. **Settings → Environment Variables** bölümüne `.env.example` dosyasındaki **8 değişkeni** ekle
-3. **Deploy**
-4. Firebase Console → **Authentication → Settings → Authorized domains** listesine Vercel alan adını ekle
-5. *(Önerilir)* **Authentication → Settings → User actions → Enable create (sign-up)** seçeneğini kapat
-6. *(Önerilir)* Firestore → **TTL policies** → `examTokens` koleksiyonunda `expireAt` alanı için TTL tanımla (eski oturum kayıtları kendiliğinden silinir)
+## Gizlilik
 
-> Firebase web yapılandırması (`VITE_FIREBASE_*`) gizli değildir, tarayıcıya gömülür. Güvenliği `firestore.rules` sağlar. `FIREBASE_SERVICE_ACCOUNT` ve `EXAM_TOKEN_SECRET` ise **gizlidir**. Bunlara asla `VITE_` öneki verme ve repoya ekleme.
+- Üyelik yoktur. Ad, e-posta ya da başka bir kişisel bilgi **toplanmaz**.
+- Sınav sonuçların ve geçmişin **sadece senin tarayıcında** tutulur.
+- Siteye yalnızca anonim istatistik gönderilir: bir denemenin kaç kez çözüldüğü, ortalama puan ve soru bazında doğru sayısı. Bu bilgiler kimseyle eşleştirilemez.
 
-## Deneme JSON biçimi
+## Geri bildirim
 
-```json
-{
-  "name": "Deneme 3",
-  "author": "Hazırlayan",
-  "modules": [
-    {
-      "id": "matematik",
-      "questions": [
-        {
-          "question": "Soru metni (kod için ``` bloğu kullanılabilir)",
-          "options": ["A şıkkı", "B şıkkı", "C şıkkı", "D şıkkı", "E şıkkı"],
-          "answer": "B",
-          "explanation": "Çözüm açıklaması"
-        }
-      ]
-    }
-  ]
-}
-```
-
-| Modül `id` | Alt test | Soru |
-|---|---|---:|
-| `matematik` | Matematiksel Temeller | 8 |
-| `olasilik` | Olasılık, İstatistik ve Veri Okuryazarlığı | 8 |
-| `algoritma` | Algoritmik Düşünme ve Problem Çözme | 12 |
-| `bilimsel` | Bilimsel Akıl Yürütme ve Araştırma Okuryazarlığı | 12 |
-| `bilisim` | Bilişim Teknolojileri | 10 |
-| `siber` | Siber Güvenlik | 10 |
-| `yapayzeka` | Yapay Zekâ ve Akıllı Sistemler | 10 |
-| `donanim` | Donanım ve Bilgisayar Sistemleri | 10 |
-
-**Puanlama:** Ortak Temel doğruları + kendi alan × 2,25 + diğer 3 alan × 1,25 (en yüksek 100).
-Admin panelinde örnek JSON indirme ve yapay zekâ ile deneme üretme promptu bulunur.
-
-## Proje yapısı
-
-```
-├── index.html, admin.html     Sayfalar
-├── api/                       Vercel sunucusuz fonksiyonları
-│   ├── exam/start.js          Sınav oturumu açar (imzalı belirteç)
-│   ├── exam/submit.js         Puanlar, cevap anahtarını döndürür, istatistik yazar
-│   ├── health.js              Yapılandırma durumu
-│   └── _lib/                  HTTP, belirteç, Admin SDK yardımcıları
-├── src/
-│   ├── core/                  Sınav kuralları, doğrulama, puanlama (ortak; sunucu da kullanır)
-│   ├── app/                   Öğrenci sitesi
-│   ├── admin/                 Yönetim paneli (sayfalar, durum, oturum)
-│   ├── services/              Firestore, Auth ve sınav API istemcileri
-│   ├── ui/                    DOM, ikon ve tema yardımcıları
-│   └── styles/                Tasarım tokenları, site ve panel stilleri
-├── dev/mock/                  Firebase'siz geliştirme için sahte servisler
-├── assets/brand/logo.svg      Marka logosu (kaynak)
-├── scripts/create-admin.mjs   İlk admin hesabını oluşturur
-├── scripts/build-icons.mjs    Logodan favicon, PWA ikonları ve OG görseli üretir
-├── scripts/seed.mjs           Örnek denemeleri Firestore'a yükler
-├── tests/                     Birim testleri (node --test)
-├── seed/                      Örnek denemeler
-├── firestore.rules            Güvenlik kuralları
-└── vercel.json                Yayın ayarları ve güvenlik başlıkları
-```
-
-## Komutlar
-
-| Komut | Açıklama |
-|---|---|
-| `npm run dev` | Geliştirme sunucusu (gerçek Firebase + yerel `/api`) |
-| `npm run dev:mock` | Örnek veriyle, Firebase olmadan geliştirme |
-| `npm run build` | Üretim paketi (`dist/`) |
-| `npm run preview` | Üretim paketini yerelde önizleme |
-| `npm test` | Birim testleri |
-| `npm run icons` | `assets/brand/logo.svg` kaynağından tüm ikonları yeniden üretir |
-| `npm run create-admin -- <e-posta> [--generate]` | Admin hesabı oluşturur (`--generate`: güçlü rastgele şifre) |
-| `npm run seed` | `seed/` klasöründeki denemeleri Firestore'a yükler |
-
-## Bilinen sınırlar
-
-- Öğrenci hesabı olmadığı için sonuçlar yalnızca o tarayıcıda saklanır ve cihazlar arasında taşınmaz.
-- Anonim bir sistemde kopya tam olarak engellenemez. Örneğin biri ikinci bir sekmede boş sınav teslim ederek anahtarı görebilir. Sistem, geliştirici araçlarıyla cevap görmeyi, kopyalamayı ve istatistik şişirmeyi engeller. Sıralama tablosu gibi rekabetçi bir özellik eklenirse öğrenci girişi de eklenmelidir.
-- API hız sınırı sunucusuz örnek başına uygulanır (en iyi çaba). Daha sıkı bir koruma için Firebase App Check veya Vercel Firewall önerilir.
+Hatalı bir soru mu buldun, bir öneri mi var? [Issue aç](https://github.com/Efe-Eroglu/ykds-simulation/issues/new). Her geri bildirim değerlendirilir.
 
 ---
 
-<div align="center"><sub>Bu proje bağımsız bir çalışma aracıdır; ÖSYM veya YÖK ile bağlantılı değildir.</sub></div>
+<div align="center">
+<sub>Bu site bağımsız bir çalışma aracıdır; <b>ÖSYM veya YÖK ile herhangi bir bağlantısı yoktur</b>.</sub>
+<br>
+<sub>Geliştirici misin? Kurulum, mimari ve güvenlik ayrıntıları için <a href="docs/GELISTIRICI.md">Geliştirici Belgesi</a>.</sub>
+</div>
