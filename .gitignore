@@ -26,3 +26,10 @@ _eski-surum/
 .claude/
 .DS_Store
 Thumbs.db
+
+# Kök dizindeki geçici deneme dosyaları (örnekler seed/ altında)
+/*.json
+!/package.json
+!/package-lock.json
+!/vercel.json
+!/firebase.json
