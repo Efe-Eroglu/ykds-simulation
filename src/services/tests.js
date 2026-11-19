@@ -151,5 +151,9 @@ export function errorMessage(e) {
     'auth/weak-password': 'Şifre çok zayıf (en az 8 karakter önerilir).',
     'auth/requires-recent-login': 'Güvenlik için tekrar giriş yapman gerekiyor.',
   };
-  return map[code] || (e && e.message) || 'Bilinmeyen hata';
+  if (map[code]) return map[code];
+  // Sunucumuzun (/api) döndürdüğü mesajlar zaten kullanıcıya yöneliktir; Firebase/tarayıcı ham hataları (kod, iç ayrıntı) gösterilmez.
+  if (e && typeof e.status === 'number' && e.message) return e.message;
+  if (code === 'network') return e.message;
+  return 'Beklenmeyen bir hata oluştu. Lütfen tekrar dene.';
 }

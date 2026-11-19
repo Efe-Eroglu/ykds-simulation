@@ -33,13 +33,13 @@ export function renderOverview(el) {
       : h('div', { class: 'empty' }, icon('chart', 22), h('b', {}, 'Henüz çözüm yok'), h('span', {}, 'Öğrenciler sınav bitirdikçe istatistikler burada görünür.')));
 
   const hc = state.health;
-  const apiOk = hc && hc.serviceAccount && hc.tokenSecret;
+  const apiOk = Boolean(hc && hc.ok);
   const s = state.settings;
   const sys = h('div', { class: 'card' },
     h('div', { class: 'card-head' }, h('div', {}, h('h3', {}, 'Sistem durumu'), h('p', {}, 'Altyapı ve güvenlik ayarları'))),
     h('div', { class: 'status-list' },
       statusItem('database', 'Veritabanı', 'Firestore bağlantısı', h('span', { class: 'pill on' }, 'Çalışıyor')),
-      statusItem('server', 'Sınav API', hc === null ? 'Ulaşılamıyor' : apiOk ? 'Puanlama sunucusu hazır' : 'Ortam değişkenleri eksik',
+      statusItem('server', 'Sınav API', hc === null ? 'Ulaşılamıyor' : apiOk ? 'Puanlama sunucusu hazır' : 'Sunucu yapılandırması eksik (Vercel günlüklerine bak)',
         h('span', { class: 'pill ' + (apiOk ? 'on' : 'err') }, apiOk ? 'Hazır' : 'Sorun')),
       statusItem('shield', 'Kopya koruması', 'Cevap anahtarı sunucuda, kopyalama engeli ' + (s?.copyProtection ? 'açık' : 'kapalı'),
         h('span', { class: 'pill ' + (s?.copyProtection ? 'on' : 'off') }, s?.copyProtection ? 'Açık' : 'Kısmi')),

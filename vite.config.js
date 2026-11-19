@@ -55,7 +55,7 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: mode === 'mock' ? [mockServices()] : [devApi()],
     build: {
-      rollupOptions: { input: { main: r('./index.html'), admin: r('./admin.html') } },
+      rollupOptions: { input: { main: r('./index.html'), admin: r('./admin.html'), notFound: r('./404.html') } },
     },
   };
 });

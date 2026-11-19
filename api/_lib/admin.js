@@ -1,15 +1,17 @@
 /* Firebase Admin SDK — yalnızca sunucuda çalışır, güvenlik kurallarını aşar. Anahtar asla istemciye gitmez. */
 import { initializeApp, cert, getApps } from 'firebase-admin/app';
 import { getFirestore, FieldValue } from 'firebase-admin/firestore';
-import { HttpError } from './http.js';
+import { HttpError, UNAVAILABLE } from './http.js';
 
 let db = null;
 
 function credentials() {
   const raw = (process.env.FIREBASE_SERVICE_ACCOUNT || '').trim();
-  if (!raw) throw new HttpError(503, 'Sunucu yapılandırması eksik (FIREBASE_SERVICE_ACCOUNT).');
-  const json = raw.startsWith('{') ? raw : Buffer.from(raw, 'base64').toString('utf8');
-  const sa = JSON.parse(json);
+  if (!raw) { console.error('[config] FIREBASE_SERVICE_ACCOUNT tanımlı değil'); throw new HttpError(503, UNAVAILABLE); }
+  let sa;
+  try { sa = JSON.parse(raw.startsWith('{') ? raw : Buffer.from(raw, 'base64').toString('utf8')); } catch {
+    console.error('[config] FIREBASE_SERVICE_ACCOUNT çözümlenemedi'); throw new HttpError(503, UNAVAILABLE);
+  }
   if (sa.private_key) sa.private_key = sa.private_key.replace(/\\n/g, '\n');
   return sa;
 }

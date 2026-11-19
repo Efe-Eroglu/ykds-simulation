@@ -1,12 +1,12 @@
 /* Sınav oturum belirteci: HMAC-SHA256 ile imzalı {t: testId, s: başlangıç, n: tek kullanımlık kimlik}. */
 import { createHmac, timingSafeEqual, randomUUID } from 'node:crypto';
-import { HttpError } from './http.js';
+import { HttpError, UNAVAILABLE } from './http.js';
 
 const MAX_AGE_MS = 24 * 60 * 60 * 1000;
 
 function secret() {
   const s = process.env.EXAM_TOKEN_SECRET;
-  if (!s || s.length < 32) throw new HttpError(503, 'Sunucu yapılandırması eksik (EXAM_TOKEN_SECRET, en az 32 karakter).');
+  if (!s || s.length < 32) { console.error('[config] EXAM_TOKEN_SECRET eksik veya 32 karakterden kısa'); throw new HttpError(503, UNAVAILABLE); }
   return s;
 }
 const b64 = buf => Buffer.from(buf).toString('base64url');

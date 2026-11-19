@@ -84,7 +84,7 @@ function updateStart() {
 }
 
 async function loadTests() {
-  if (!firebaseConfigured) { renderTestsError('Site yapılandırması eksik (Firebase).'); return; }
+  if (!firebaseConfigured) { renderTestsError('Denemeler şu anda yüklenemiyor. Lütfen biraz sonra tekrar dene.'); return; }
   const box = $('#test-list'); box.replaceChildren(h('div', { class: 'skeleton' }), h('div', { class: 'skeleton' }));
   try {
     tests = await listPublishedTests();

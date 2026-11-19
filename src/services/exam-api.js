@@ -15,7 +15,7 @@ async function call(path, { method = 'POST', body } = {}) {
   }
   let data = {};
   try { data = await res.json(); } catch { /* boş yanıt */ }
-  if (!res.ok) throw Object.assign(new Error(data.error || `Sunucu hatası (${res.status})`), { status: res.status });
+  if (!res.ok) throw Object.assign(new Error(typeof data.error === 'string' && data.error ? data.error : 'Sunucu şu anda yanıt vermiyor. Lütfen biraz sonra tekrar dene.'), { status: res.status });
   return data;
 }
 
@@ -25,7 +25,7 @@ export const startSession = testId => call('/api/exam/start', { body: { testId }
 /** → { answers: string[], explanations: string[]|null, score } */
 export const submitExam = (token, answers, field) => call('/api/exam/submit', { body: { token, answers, field } });
 
-/** → { ok, serviceAccount, tokenSecret } | null */
+/** → { ok } | null */
 export async function checkHealth() {
   try { return await call('/api/health', { method: 'GET' }); } catch { return null; }
 }

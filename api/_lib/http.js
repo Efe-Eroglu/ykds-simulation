@@ -4,11 +4,23 @@ export class HttpError extends Error {
   constructor(status, message) { super(message); this.status = status; }
 }
 
+/** İstemciye gösterilen genel mesajlar: iç ayrıntı (ortam değişkeni, yığın izi, kütüphane hatası) asla dışarı sızmaz. */
+export const UNAVAILABLE = 'Hizmet geçici olarak kullanılamıyor. Lütfen biraz sonra tekrar dene.';
+export const SERVER_ERROR = 'Beklenmeyen bir sunucu hatası oluştu. Lütfen tekrar dene.';
+
+/** Hata nesnesini istemciye güvenle gönderilebilecek {status, message} çiftine çevirir. */
+export function publicError(e) {
+  if (e instanceof HttpError && e.status >= 400 && e.status < 500) return { status: e.status, message: e.message };
+  if (e instanceof HttpError && e.status === 503) return { status: 503, message: e.message || UNAVAILABLE };
+  return { status: 500, message: SERVER_ERROR };
+}
+
 export function send(res, status, body) {
   res.statusCode = status;
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
   res.setHeader('Cache-Control', 'no-store');
   res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Robots-Tag', 'noindex');
   res.end(JSON.stringify(body));
 }
 
@@ -59,9 +71,9 @@ export function postHandler(name, { limit = 30, windowMs = 60000 } = {}, fn) {
       const body = await readJson(req);
       send(res, 200, await fn(body, req));
     } catch (e) {
-      const status = e instanceof HttpError ? e.status : 500;
-      if (status === 500) console.error(`[api/${name}]`, e);
-      send(res, status, { error: status === 500 ? 'Sunucu hatası.' : e.message });
+      const { status, message } = publicError(e);
+      if (status >= 500) console.error(`[api/${name}]`, e);
+      send(res, status, { error: message });
     }
   };
 }
