@@ -27,8 +27,11 @@ export function send(res, status, body) {
 const MAX_BODY = 16 * 1024;
 
 export async function readJson(req) {
-  if (req.body && typeof req.body === 'object') return req.body;
-  if (typeof req.body === 'string') return parse(req.body);
+  // Vercel req.body'yi tembel çözümler ve geçersiz JSON'da hata fırlatır; bunu 400'e çeviririz.
+  let pre;
+  try { pre = req.body; } catch { throw new HttpError(400, 'Geçersiz JSON.'); }
+  if (pre && typeof pre === 'object') return pre;
+  if (typeof pre === 'string') return parse(pre);
   let raw = '';
   for await (const chunk of req) {
     raw += chunk;
