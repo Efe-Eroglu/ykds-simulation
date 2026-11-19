@@ -33,7 +33,7 @@ export function renderHistory() {
       h('div', { class: 'hi-main' },
         h('b', {}, a.testName),
         h('small', {}, `${fmtDateTime(a.finishedAt)} · Alan: ${modById[a.field]?.name || a.field}`),
-        h('small', {}, `Doğru ${t.r} · Yanlış ${t.w} · Boş ${t.b}`)),
+        h('small', {}, `Doğru ${t.r} · Yanlış ${t.w} · Boş ${t.b} · Süre ${Math.round((a.finishedAt - a.startedAt) / 60000)} dk`)),
       h('div', { class: 'hi-score' }, f2(a.total)),
       h('div', { class: 'row' },
         h('button', {
