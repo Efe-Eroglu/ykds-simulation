@@ -60,6 +60,12 @@ service cloud.firestore {
       allow read, write: if false;
     }
 
+    // Kişisel sınav sonuçları — yalnızca sunucu yazar; sahibi okur ve silebilir.
+    match /users/{uid}/attempts/{id} {
+      allow read, delete: if signedIn() && request.auth.uid == uid;
+      allow create, update: if false;
+    }
+
     // Site ayarları — herkes okur, admin yazar.
     match /settings/{doc} {
       allow read: if true;

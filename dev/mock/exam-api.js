@@ -11,7 +11,7 @@ export async function startSession(testId) {
   return { token: 'mock.' + btoa(JSON.stringify({ t: testId, s: Date.now() })), startedAt: Date.now() };
 }
 
-export async function submitExam(token, answers, field) {
+export async function submitExam(token, answers, field, idToken = null) {
   await wait(700);
   const { t: testId } = JSON.parse(atob(token.split('.')[1]));
   const db = load(), test = db.tests.find(x => x.meta.id === testId);
@@ -21,8 +21,13 @@ export async function submitExam(token, answers, field) {
   const s = test.stats || { attempts: 0, avg: 0, lastAt: null, fields: {}, right: {} };
   s.avg = (s.avg * s.attempts + sc.total) / (s.attempts + 1); s.attempts++; s.lastAt = Date.now();
   s.fields[field] = (s.fields[field] || 0) + 1;
-  test.stats = s; save(db);
-  return { answers: key.answers.split(''), explanations: db.settings.showExplanations ? key.explanations : null, score: sc };
+  test.stats = s;
+  if (idToken) {
+    const now = Date.now();
+    (db.myAttempts ||= []).push({ id: 'ma' + now.toString(36), testId, testName: test.meta.name, field, startedAt: now - 95 * 60000, finishedAt: now, answers, total: sc.total, temel: sc.temel, alan: sc.alan, per: sc.per });
+  }
+  save(db);
+  return { savedToAccount: !!idToken, answers: key.answers.split(''), explanations: db.settings.showExplanations ? key.explanations : null, score: sc };
 }
 
 export async function checkHealth() { return { ok: true, serviceAccount: true, tokenSecret: true, mock: true }; }

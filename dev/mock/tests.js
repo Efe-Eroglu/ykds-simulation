@@ -39,4 +39,6 @@ export async function updateTest(id, meta, full = null) {
 export async function setPublished(id, published) { await wait(200); const db = load(); Object.assign(find(db, id).meta, { published, updatedAt: Date.now() }); save(db); }
 export async function deleteTest(id) { await wait(300); const db = load(); db.tests = db.tests.filter(t => t.meta.id !== id); save(db); }
 export async function saveSettings(s) { await wait(300); const db = load(); db.settings = structuredClone(s); save(db); }
+export async function listMyAttempts() { await wait(); return (load().myAttempts || []).slice().sort((a, b) => b.finishedAt - a.finishedAt); }
+export async function deleteMyAttempt(uid, id) { await wait(200); const db = load(); db.myAttempts = (db.myAttempts || []).filter(a => a.id !== id); save(db); }
 export function errorMessage(e) { return (e && e.message) || 'Bilinmeyen hata'; }

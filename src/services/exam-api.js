@@ -22,8 +22,9 @@ async function call(path, { method = 'POST', body } = {}) {
 /** → { token, startedAt } */
 export const startSession = testId => call('/api/exam/start', { body: { testId } });
 
-/** → { answers: string[], explanations: string[]|null, score } */
-export const submitExam = (token, answers, field) => call('/api/exam/submit', { body: { token, answers, field } });
+/** → { answers: string[], explanations: string[]|null, score, savedToAccount } */
+export const submitExam = (token, answers, field, idToken = null) =>
+  call('/api/exam/submit', { body: idToken ? { token, answers, field, idToken } : { token, answers, field } });
 
 /** → { ok } | null */
 export async function checkHealth() {

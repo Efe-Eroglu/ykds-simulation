@@ -6,9 +6,10 @@
  *   testStats/{id}     { attempts, scoreSum, lastAt, fields:{}, right:{i:n} }             yalnızca admin okur, sunucu yazar
  *   settings/site      { announcement, maintenance, copyProtection, showExplanations }    herkes okur, admin yazar
  *   admins/{uid}       { email }                                                          konsoldan elle eklenir
+ *   users/{uid}/attempts/{id}  { testId, testName, field, startedAt, finishedAt, answers, total, temel, alan, per }  sahibi okur/siler, sunucu yazar
  */
 import {
-  collection, doc, getDoc, getDocs, query, where, writeBatch, updateDoc, setDoc, serverTimestamp,
+  collection, doc, getDoc, getDocs, deleteDoc, query, where, writeBatch, updateDoc, setDoc, serverTimestamp,
 } from 'firebase/firestore/lite';
 import { getDb } from '../lib/firebase.js';
 import { TOTAL_Q } from '../core/exam-config.js';
@@ -88,6 +89,14 @@ export async function listStats() {
   });
   return out;
 }
+
+/** Giriş yapan kullanıcının kendi sınav sonuçları (en yeni önce). */
+export async function listMyAttempts(uid) {
+  const snap = await getDocs(collection(getDb(), 'users', uid, 'attempts'));
+  return snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => b.finishedAt - a.finishedAt);
+}
+
+export const deleteMyAttempt = (uid, id) => deleteDoc(doc(getDb(), 'users', uid, 'attempts', id));
 
 export async function createTest({ name, author, published, full }) {
   const db = getDb();

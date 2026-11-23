@@ -11,6 +11,7 @@ import { renderOverview } from './pages/overview.js';
 import { renderTests } from './pages/tests.js';
 import { renderEditor, isEditorDirty, clearEditorDirty } from './pages/editor.js';
 import { renderSettings } from './pages/settings.js';
+import { renderResults } from './pages/results.js';
 
 /* ---------- Ekran durumları ---------- */
 function screen(name, card = null) {
@@ -52,6 +53,7 @@ const PAGES = {
   overview: { title: 'Genel bakış', render: el => renderOverview(el) },
   tests: { title: 'Denemeler', render: el => renderTests(el) },
   editor: { title: 'Düzenleyici', render: (el, id) => renderEditor(el, id) },
+  results: { title: 'Sonuçlarım', render: el => renderResults(el) },
   settings: { title: 'Ayarlar', render: el => renderSettings(el) },
 };
 
@@ -90,7 +92,7 @@ async function route() {
 /* Veri değişince düzenleyici dışındaki sayfayı yeniden çiz (düzenleyicideki yazılanı kaybetmemek için). */
 onChange(() => {
   $('#nav-count').textContent = state.tests.length || '';
-  if (current && current.page !== 'editor' && !$('#shell').classList.contains('hidden')) {
+  if (current && current.page !== 'editor' && current.page !== 'results' && !$('#shell').classList.contains('hidden')) {
     PAGES[current.page].render($(`.page[data-page="${current.page}"]`), current.id);
   }
 });

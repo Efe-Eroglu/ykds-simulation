@@ -17,5 +17,7 @@ export async function login(email, pass) {
   cb?.(USER);
 }
 export async function logout() { try { sessionStorage.setItem(KEY, '1'); } catch { /* */ } cb?.(null); }
+export async function currentUser() { return current(); }
+export async function getIdToken() { return current() ? 'mock-id-token' : null; }
 export async function resetPassword() { await wait(300); }
 export async function changePassword() { await wait(400); }

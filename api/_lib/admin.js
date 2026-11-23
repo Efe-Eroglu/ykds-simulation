@@ -1,6 +1,7 @@
 /* Firebase Admin SDK — yalnızca sunucuda çalışır, güvenlik kurallarını aşar. Anahtar asla istemciye gitmez. */
 import { initializeApp, cert, getApps } from 'firebase-admin/app';
 import { getFirestore, FieldValue } from 'firebase-admin/firestore';
+import { getAuth } from 'firebase-admin/auth';
 import { HttpError, UNAVAILABLE } from './http.js';
 
 let db = null;
@@ -16,12 +17,15 @@ function credentials() {
   return sa;
 }
 
+const adminApp = () => getApps()[0] || initializeApp({ credential: cert(credentials()) });
+
 export function adminDb() {
   if (db) return db;
-  const app = getApps()[0] || initializeApp({ credential: cert(credentials()) });
-  db = getFirestore(app);
+  db = getFirestore(adminApp());
   return db;
 }
+
+export const adminAuth = () => getAuth(adminApp());
 
 export { FieldValue };
 
