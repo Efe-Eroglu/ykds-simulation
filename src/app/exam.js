@@ -130,7 +130,8 @@ async function finish() {
   overlay('busy');
   try {
     // Giriş yapılmışsa (ör. yönetim panelinden) sonuç hesaba da kaydedilir; auth yalnızca burada yüklenir.
-    const idToken = await import('../services/auth.js').then(m => m.getIdToken()).catch(() => null);
+    const user = await import('../services/auth.js').then(m => m.currentUser()).catch(() => null);
+    const idToken = user ? await user.getIdToken().catch(() => null) : null;
     const res = await submitExam(S.token, S.answers, S.field, idToken);
     const full = mergeTest(S.test, { answers: res.answers, explanations: res.explanations || [] });
     const qs = buildQuestions(full);
@@ -139,6 +140,7 @@ async function finish() {
       id: 'a' + Date.now().toString(36), testId: S.testId, testName: S.testName, field: S.field,
       startedAt: S.startedAt, finishedAt: S.finishedAt, answers: S.answers, flags: S.flags,
       total: sc.total, temel: sc.temel, alan: sc.alan, per: sc.per,
+      uid: user ? user.uid : null,
     };
     if (!saveAttempt(att, full)) toast('Tarayıcı depolama alanı dolu; sonuç geçmişe kaydedilemedi.', 'error');
     else if (res.savedToAccount) toast('Sonucun hesabına da kaydedildi (Yönetim › Sonuçlarım).');

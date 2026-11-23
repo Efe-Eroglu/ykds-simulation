@@ -5,7 +5,7 @@ import { hydrateIcons, icon } from '../ui/icons.js';
 import { mountThemeToggle } from '../ui/theme.js';
 import { store, KEYS } from '../lib/store.js';
 import { firebaseConfigured } from '../lib/firebase.js';
-import { listPublishedTests, getTestContent, getSettings, errorMessage } from '../services/tests.js';
+import { listPublishedTests, getTestContent, getSettings, listMyAttempts, errorMessage } from '../services/tests.js';
 import { startSession } from '../services/exam-api.js';
 import { startExam, resumeExam, getSavedSession, discardSession, bindExamEvents, setCopyProtection } from './exam.js';
 import { bindResultEvents } from './result.js';
@@ -17,6 +17,8 @@ let tests = [];
 let selTest = null;
 let selField = store.get(KEYS.field);
 let maintenance = false;
+let solved = new Map();   // testId → { count, best, last }
+let solvedBy = null;      // giriş yapılmışsa hesabın e-postası
 
 /* ---------- Sekmeler ---------- */
 function setTab(name) {
@@ -27,7 +29,7 @@ function setTab(name) {
   });
   $$('.tabpane').forEach(p => p.classList.toggle('hidden', p.id !== 'tab-' + name));
   if (name === 'results') renderHistory();
-  if (name === 'solve' && tests.length) { renderTests(); updateStart(); } // çözülen/silinen sonuçlar yansısın
+  if (name === 'solve') refreshSolved(); // çözülen/silinen sonuçlar yansısın
 }
 
 /* ---------- Site ayarları ---------- */
@@ -59,14 +61,29 @@ function renderFieldChoices() {
   }, f.name)));
 }
 
-/** Bu tarayıcıda çözülmüş denemeler: testId → { count, best, last } */
-function solvedMap() {
+function toSolvedMap(atts) {
   const m = new Map();
-  getAttempts().forEach(a => {
+  atts.forEach(a => {
     const cur = m.get(a.testId) || { count: 0, best: -Infinity, last: 0 };
     m.set(a.testId, { count: cur.count + 1, best: Math.max(cur.best, a.total), last: Math.max(cur.last, a.finishedAt) });
   });
   return m;
+}
+
+/**
+ * "Çözüldü" işaretlerinin kaynağı: giriş yapılmışsa YALNIZCA o hesabın sonuçları,
+ * değilse bu tarayıcıda hesapsız çözülenler (başka bir hesapla çözülenler karışmasın).
+ */
+async function refreshSolved() {
+  let user = null;
+  try { user = await import('../services/auth.js').then(m => m.currentUser()); } catch { /* auth yok/yapılandırılmamış */ }
+  if (user) {
+    try { solved = toSolvedMap(await listMyAttempts(user.uid)); solvedBy = user.email; } catch (e) { console.error(e); solved = new Map(); solvedBy = user.email; }
+  } else {
+    solved = toSolvedMap(getAttempts().filter(a => !a.uid));
+    solvedBy = null;
+  }
+  if (tests.length) { renderTests(); updateStart(); }
 }
 
 function renderTests() {
@@ -75,7 +92,7 @@ function renderTests() {
     box.append(h('div', { class: 'empty' }, h('b', {}, 'Henüz yayınlanmış deneme yok'), h('span', {}, 'Yeni denemeler eklendiğinde burada görünecek.')));
     return;
   }
-  const solved = solvedMap();
+  if (solvedBy) box.append(h('p', { class: 'muted small', style: 'margin:0' }, `${solvedBy} hesabıyla çözdüğün denemeler işaretleniyor.`));
   // Çözülmemiş denemeler üstte; kendi aralarında yayın sırası korunur.
   const ordered = [...tests.filter(t => !solved.has(t.id)), ...tests.filter(t => solved.has(t.id))];
   ordered.forEach(t => {
@@ -101,7 +118,7 @@ function updateStart() {
   const ok = selTest && selField && !maintenance;
   $('#btn-start').disabled = !ok;
   $('#start-summary').textContent = maintenance ? 'Bakım sırasında yeni sınav başlatılamaz.'
-    : selTest && selField ? `${selTest.name} · Alanın: ${modById[selField].name}${solvedMap().has(selTest.id) ? ' · Bu denemeyi daha önce çözdün' : ''}`
+    : selTest && selField ? `${selTest.name} · Alanın: ${modById[selField].name}${solved.has(selTest.id) ? ' · Bu denemeyi daha önce çözdün' : ''}`
       : 'Devam etmek için alan ve deneme seç.';
 }
 

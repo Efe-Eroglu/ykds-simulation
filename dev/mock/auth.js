@@ -3,7 +3,7 @@ import { wait } from './db.js';
 
 const KEY = 'ykds_mock_logged_out';
 const USER = {
-  uid: 'mock-admin-uid-7f3a9c', email: 'admin@ornek.com',
+  uid: 'mock-admin-uid-7f3a9c', email: 'admin@ornek.com', getIdToken: async () => 'mock-id-token',
   metadata: { lastSignInTime: new Date(Date.now() - 3600000).toUTCString(), creationTime: new Date(Date.now() - 40 * 86400000).toUTCString() },
 };
 let cb = null;
