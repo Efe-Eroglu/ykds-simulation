@@ -1,6 +1,6 @@
 import { EXAM_MINUTES, FIELDS, modById } from '../core/exam-config.js';
 import { isValidContent } from '../core/split.js';
-import { $, $$, h, toast, confirmDlg, fmtDate } from '../ui/dom.js';
+import { $, $$, h, toast, confirmDlg, fmtDate, f2 } from '../ui/dom.js';
 import { hydrateIcons, icon } from '../ui/icons.js';
 import { mountThemeToggle } from '../ui/theme.js';
 import { store, KEYS } from '../lib/store.js';
@@ -11,6 +11,7 @@ import { startExam, resumeExam, getSavedSession, discardSession, bindExamEvents,
 import { bindResultEvents } from './result.js';
 import { renderHistory, bindHistoryEvents } from './history.js';
 import { show } from './view.js';
+import { getAttempts } from './attempts.js';
 
 let tests = [];
 let selTest = null;
@@ -26,6 +27,7 @@ function setTab(name) {
   });
   $$('.tabpane').forEach(p => p.classList.toggle('hidden', p.id !== 'tab-' + name));
   if (name === 'results') renderHistory();
+  if (name === 'solve' && tests.length) { renderTests(); updateStart(); } // çözülen/silinen sonuçlar yansısın
 }
 
 /* ---------- Site ayarları ---------- */
@@ -57,16 +59,35 @@ function renderFieldChoices() {
   }, f.name)));
 }
 
+/** Bu tarayıcıda çözülmüş denemeler: testId → { count, best, last } */
+function solvedMap() {
+  const m = new Map();
+  getAttempts().forEach(a => {
+    const cur = m.get(a.testId) || { count: 0, best: -Infinity, last: 0 };
+    m.set(a.testId, { count: cur.count + 1, best: Math.max(cur.best, a.total), last: Math.max(cur.last, a.finishedAt) });
+  });
+  return m;
+}
+
 function renderTests() {
   const box = $('#test-list'); box.textContent = '';
   if (!tests.length) {
     box.append(h('div', { class: 'empty' }, h('b', {}, 'Henüz yayınlanmış deneme yok'), h('span', {}, 'Yeni denemeler eklendiğinde burada görünecek.')));
     return;
   }
-  tests.forEach(t => box.append(h('button', {
-    type: 'button', class: 'choice test-item' + (selTest && selTest.id === t.id ? ' sel' : ''), 'aria-pressed': String(!!selTest && selTest.id === t.id),
-    onclick: () => { selTest = t; renderTests(); updateStart(); },
-  }, h('b', {}, t.name), h('small', {}, `${t.author ? t.author + ' · ' : ''}${fmtDate(t.createdAt)} · ${t.questionCount} soru`))));
+  const solved = solvedMap();
+  // Çözülmemiş denemeler üstte; kendi aralarında yayın sırası korunur.
+  const ordered = [...tests.filter(t => !solved.has(t.id)), ...tests.filter(t => solved.has(t.id))];
+  ordered.forEach(t => {
+    const s = solved.get(t.id), on = !!selTest && selTest.id === t.id;
+    box.append(h('button', {
+      type: 'button', class: 'choice test-item' + (on ? ' sel' : '') + (s ? ' solved' : ''), 'aria-pressed': String(on),
+      onclick: () => { selTest = t; renderTests(); updateStart(); },
+    },
+      h('div', { class: 'ti-head' }, h('b', {}, t.name), s ? h('span', { class: 'pill on' }, s.count > 1 ? `${s.count} kez çözüldü` : 'Çözüldü') : null),
+      h('small', {}, `${t.author ? t.author + ' · ' : ''}${fmtDate(t.createdAt)} · ${t.questionCount} soru`),
+      s ? h('small', {}, `En yüksek puan ${f2(s.best)} · Son çözüm ${fmtDate(s.last)}`) : null));
+  });
 }
 
 function renderTestsError(msg) {
@@ -80,7 +101,8 @@ function updateStart() {
   const ok = selTest && selField && !maintenance;
   $('#btn-start').disabled = !ok;
   $('#start-summary').textContent = maintenance ? 'Bakım sırasında yeni sınav başlatılamaz.'
-    : selTest && selField ? `${selTest.name} · Alanın: ${modById[selField].name}` : 'Devam etmek için alan ve deneme seç.';
+    : selTest && selField ? `${selTest.name} · Alanın: ${modById[selField].name}${solvedMap().has(selTest.id) ? ' · Bu denemeyi daha önce çözdün' : ''}`
+      : 'Devam etmek için alan ve deneme seç.';
 }
 
 async function loadTests() {
