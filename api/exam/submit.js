@@ -16,7 +16,10 @@ const TOKEN_TTL_MS = 2 * 24 * 60 * 60 * 1000;
 /** Geçerli bir Firebase kimlik belirteci ise uid, değilse null (sınav yine değerlendirilir). */
 async function uidOf(idToken) {
   if (typeof idToken !== 'string' || !idToken || idToken.length > 4096) return null;
-  try { return (await adminAuth().verifyIdToken(idToken)).uid; } catch { return null; }
+  try { return (await (await adminAuth()).verifyIdToken(idToken)).uid; } catch (e) {
+    console.error('[submit] kimlik doğrulanamadı:', e.message);
+    return null;
+  }
 }
 
 export default postHandler('submit', { limit: 20, windowMs: 60000 }, async body => {
