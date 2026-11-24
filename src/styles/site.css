@@ -150,7 +150,7 @@ ul.plain { padding-left: 20px; } ul.plain li { margin: 7px 0; }
 .dot.ans { background: var(--pri-600); } .dot.flag { background: var(--warn); border-radius: 50%; } .dot.cur { border: 2px solid var(--warn); }
 .qmeta { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
 .qmeta #q-num { font-weight: 700; }
-.qmeta .btn { margin-left: auto; }
+.qmeta .qactions { margin-left: auto; display: flex; gap: 8px; }
 .btn.flagged { background: var(--warn-soft); border-color: var(--warn); color: var(--warn); }
 .qtext, .rich { white-space: pre-wrap; word-wrap: break-word; font-size: 1.02rem; line-height: 1.65; }
 .qtext pre, .rich pre { background: var(--surface-2); border: 1px solid var(--line); padding: 12px; border-radius: 10px; overflow: auto; font: .84rem/1.5 var(--mono); white-space: pre; }
@@ -159,6 +159,11 @@ ul.plain { padding-left: 20px; } ul.plain li { margin: 7px 0; }
 .opt:hover { border-color: var(--line-strong); background: var(--surface-2); }
 .opt .l { display: inline-grid; place-items: center; flex: none; width: 26px; height: 26px; border-radius: 8px; background: var(--surface-2); border: 1px solid var(--line); font-weight: 700; font-size: .82rem; }
 .opt .t { white-space: pre-wrap; word-break: break-word; padding-top: 2px; }
+.opt.struck .t { text-decoration: line-through; text-decoration-thickness: 2px; }
+.opt.struck { opacity: .5; }
+.opt.struck.sel { opacity: .8; }
+.qtext mark { background: #fde047; color: #1a1a1a; border-radius: 3px; }
+.qhint { margin: -6px 0 14px; }
 .opt.sel { border-color: var(--pri); background: var(--pri-soft); }
 .opt.sel .l { background: var(--pri-600); border-color: var(--pri-600); color: #fff; }
 .opt.right { border-color: var(--ok); background: var(--ok-soft); }
@@ -171,6 +176,7 @@ ul.plain { padding-left: 20px; } ul.plain li { margin: 7px 0; }
 
 /* Kopya koruması (sınav sırasında) */
 body.no-copy #view-exam { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+body.no-copy #view-exam #q-text { -webkit-user-select: text; user-select: text; }
 @media print { body.no-copy #view-exam { display: none !important; } }
 .submitting { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; background: color-mix(in srgb, var(--bg) 70%, transparent); backdrop-filter: blur(4px); }
 .submitting .card { display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; max-width: 360px; }
