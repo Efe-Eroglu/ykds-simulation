@@ -163,7 +163,6 @@ ul.plain { padding-left: 20px; } ul.plain li { margin: 7px 0; }
 .opt.struck { opacity: .5; }
 .opt.struck.sel { opacity: .8; }
 .qtext mark { background: #fde047; color: #1a1a1a; border-radius: 3px; }
-.qhint { margin: -6px 0 14px; }
 .opt.sel { border-color: var(--pri); background: var(--pri-soft); }
 .opt.sel .l { background: var(--pri-600); border-color: var(--pri-600); color: #fff; }
 .opt.right { border-color: var(--ok); background: var(--ok-soft); }
