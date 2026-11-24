@@ -197,6 +197,9 @@ tr.own td { font-weight: 650; }
 .ritem { border-top: 1px solid var(--line); padding: 18px 0; }
 .ritem:first-child { border-top: 0; }
 .rhead { display: flex; gap: 8px; align-items: center; margin-bottom: 10px; flex-wrap: wrap; }
+.bm-btn { margin-left: auto; gap: 6px; color: var(--muted); }
+.bm-btn.on { color: var(--pri); }
+.bm-btn.on svg { fill: currentColor; }
 .st { font-size: .72rem; font-weight: 700; padding: 3px 9px; border-radius: 99px; }
 .st.right { background: var(--ok-soft); color: var(--ok); } .st.wrong { background: var(--bad-soft); color: var(--bad); } .st.blank { background: var(--warn-soft); color: var(--warn); }
 .expl { margin-top: 8px; padding: 12px 14px; border-radius: var(--r); background: var(--surface-2); border-left: 3px solid var(--pri); font-size: .92rem; white-space: pre-wrap; }

@@ -16,5 +16,6 @@ export const KEYS = {
   session: 'ykds_session',
   attempts: 'ykds_attempts',
   field: 'ykds_field',
+  bookmarks: 'ykds_bookmarks',
   testCopy: id => 'ykds_tc_' + id,
 };

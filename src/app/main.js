@@ -10,7 +10,7 @@ import { listPublishedTests, getTestContent, getSettings, listMyAttempts, errorM
 import { startSession } from '../services/exam-api.js';
 import { startExam, resumeExam, getSavedSession, discardSession, bindExamEvents, setCopyProtection, remainingMs } from './exam.js';
 import { bindResultEvents } from './result.js';
-import { renderHistory, bindHistoryEvents } from './history.js';
+import { renderHistory, renderSaved, bindHistoryEvents } from './history.js';
 import { show } from './view.js';
 import { getAttempts } from './attempts.js';
 
@@ -31,6 +31,7 @@ function setTab(name) {
   $$('.tabpane').forEach(p => p.classList.toggle('hidden', p.id !== 'tab-' + name));
   moveTabIndicator();
   if (name === 'results') renderHistory();
+  if (name === 'saved') renderSaved();
   if (name === 'solve') refreshSolved(); // çözülen/silinen sonuçlar yansısın
 }
 

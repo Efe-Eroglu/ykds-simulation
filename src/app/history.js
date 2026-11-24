@@ -3,6 +3,7 @@ import { buildQuestions, statusOf, totals } from '../core/scoring.js';
 import { $, h, toast, confirmDlg, f2, fmtDateTime } from '../ui/dom.js';
 import { getAttempts, deleteAttempt, getTestCopy, getLocalTestCopy } from './attempts.js';
 import { openAttempt, reviewItem } from './result.js';
+import { getBookmarks } from './bookmarks.js';
 
 export function renderHistory() {
   const atts = getAttempts().slice().sort((a, b) => b.finishedAt - a.finishedAt);
@@ -69,12 +70,35 @@ function renderWrong() {
   const box = $('#wrong-list'); box.textContent = '';
   $('#wrong-count').textContent = `${items.length} soru`;
   if (!items.length) { box.append(h('p', { class: 'muted' }, 'Bu filtrede soru yok.')); return; }
-  items.slice(0, 100).forEach(x => box.append(reviewItem(x.q, x.a, statusOf(x.q, x.a), `${x.att.testName} · Soru ${x.i + 1}`, false)));
+  items.slice(0, 100).forEach(x => box.append(reviewItem(x.q, x.a, statusOf(x.q, x.a), `${x.att.testName} · Soru ${x.i + 1}`, false, { testId: x.att.testId, testName: x.att.testName, i: x.i })));
   if (items.length > 100) box.append(h('p', { class: 'muted' }, `İlk 100 soru gösteriliyor (${items.length} soru var). Modül filtresiyle daraltabilirsin.`));
 }
 
+/** Kaydedilen sorular (en yeni kayıt üstte). */
+export function renderSaved() {
+  const mod = $('#saved-mod').value;
+  const all = getBookmarks().slice().sort((a, b) => b.savedAt - a.savedAt);
+  const items = all.filter(b => !mod || b.q.mod === mod);
+  const box = $('#saved-list'); box.textContent = '';
+  $('#saved-count').textContent = all.length ? `${all.length} soru` : '';
+  if (!all.length) {
+    box.append(h('div', { class: 'empty' },
+      h('b', {}, 'Henüz kaydettiğin soru yok'),
+      h('span', { class: 'muted' }, 'Sonuçlarını incelerken bir sorunun yanındaki "Kaydet" düğmesine bastığında burada listelenir.')));
+    return;
+  }
+  if (!items.length) { box.append(h('p', { class: 'muted' }, 'Bu modülde kaydettiğin soru yok.')); return; }
+  items.forEach(b => box.append(reviewItem(b.q, b.a, statusOf(b.q, b.a), `${b.testName} · Soru ${b.i + 1}`, false,
+    { testId: b.key.slice(0, b.key.lastIndexOf(':')), testName: b.testName, i: b.i },
+    on => { if (!on) renderSaved(); })));
+}
+
+const modOptions = () => [h('option', { value: '' }, 'Tüm modüller'), ...MODULES.map(m => h('option', { value: m.id }, m.name))];
+
 export function bindHistoryEvents() {
-  $('#wrong-mod').append(h('option', { value: '' }, 'Tüm modüller'), ...MODULES.map(m => h('option', { value: m.id }, m.name)));
+  $('#wrong-mod').append(...modOptions());
+  $('#saved-mod').append(...modOptions());
   $('#wrong-filter').addEventListener('change', renderWrong);
   $('#wrong-mod').addEventListener('change', renderWrong);
+  $('#saved-mod').addEventListener('change', renderSaved);
 }

@@ -100,6 +100,7 @@
       <span class="tab-ind" aria-hidden="true"></span>
       <button class="tab active" data-tab="solve" role="tab" aria-selected="true">Sınava Gir</button>
       <button class="tab" data-tab="results" role="tab" aria-selected="false">Sonuçlarım</button>
+      <button class="tab" data-tab="saved" role="tab" aria-selected="false">Kaydettiklerim</button>
       <button class="tab" data-tab="info" role="tab" aria-selected="false">Sınav Kuralları</button>
     </nav>
 
@@ -142,6 +143,18 @@
         </div>
         <p class="muted small">Her soru için en son çözdüğün durum esas alınır; sonradan doğru yaptığın sorular listeden çıkar.</p>
         <div id="wrong-list"></div>
+      </div>
+    </div>
+
+    <!-- Kaydettiklerim -->
+    <div id="tab-saved" class="tabpane hidden" role="tabpanel">
+      <div class="card">
+        <div class="row between wrap-row">
+          <h2>Kaydettiğim sorular <span id="saved-count" class="muted small"></span></h2>
+          <select id="saved-mod" aria-label="Modül"></select>
+        </div>
+        <p class="muted small">Sonuçlarını incelerken kaydettiğin sorular burada saklanır (yalnızca bu tarayıcıda). Sonucu silsen bile kayıtlı soru kalır.</p>
+        <div id="saved-list"></div>
       </div>
     </div>
 
