@@ -7,6 +7,8 @@ import { submitExam } from '../services/exam-api.js';
 import { saveAttempt } from './attempts.js';
 import { openAttempt } from './result.js';
 import { show } from './view.js';
+import { icon } from '../ui/icons.js';
+import { bookmarkKey, isBookmarked, toggleBookmark, refreshBookmarks } from './bookmarks.js';
 
 let S = null;          // aktif sınav oturumu
 let timerId = null;
@@ -117,6 +119,7 @@ function render() {
     oncontextmenu: e => { e.preventDefault(); toggleStrike(k); },
   }, h('span', { class: 'l' }, LETTERS[k]), h('span', { class: 't' }, o))));
 
+  paintBookmark();
   const fl = $('#btn-flag');
   fl.classList.toggle('flagged', S.flags[i]);
   fl.textContent = S.flags[i] ? '⚑ İşaretli' : '⚑ İşaretle';
@@ -217,6 +220,23 @@ function onTextContextMenu(e) {
   persist(); render();
 }
 
+/* ---------- Soruyu kaydet ---------- */
+function paintBookmark() {
+  const btn = $('#btn-bm'), on = isBookmarked(bookmarkKey(S.testId, S.idx));
+  btn.classList.toggle('on', on);
+  btn.setAttribute('aria-pressed', String(on));
+  btn.title = on ? 'Kaydedilenlerden çıkar' : 'Soruyu kaydet (Kaydettiklerim sekmesi)';
+  btn.replaceChildren(icon('bookmark', 15), on ? 'Kaydedildi' : 'Kaydet');
+}
+function toggleBm() {
+  if (busy()) return;
+  const i = S.idx;
+  const on = toggleBookmark({ key: bookmarkKey(S.testId, i), testName: S.testName, i, q: S.qs[i], a: S.answers[i] });
+  if (on == null) { toast('Tarayıcı depolama alanı dolu; soru kaydedilemedi.', 'error'); return; }
+  paintBookmark();
+  toast(on ? 'Soru kaydedildi; cevabı sınav bitince eklenecek.' : 'Soru kayıtlardan çıkarıldı.');
+}
+
 /* ---------- Soruyu kopyala ---------- */
 async function copyQuestion() {
   if (!S) return;
@@ -267,6 +287,7 @@ async function finish() {
     const full = mergeTest(S.test, { answers: res.answers, explanations: res.explanations || [] });
     const qs = buildQuestions(full);
     const sc = computeScore(qs, S.answers, S.field);
+    refreshBookmarks(S.testId, qs, S.answers);
     const att = {
       id: 'a' + Date.now().toString(36), testId: S.testId, testName: S.testName, field: S.field,
       startedAt: S.startedAt, finishedAt: S.finishedAt, answers: S.answers, flags: S.flags,
@@ -299,6 +320,7 @@ export function bindExamEvents() {
   $('#btn-next').addEventListener('click', () => go(S.idx + 1));
   $('#btn-flag').addEventListener('click', toggleFlag);
   $('#btn-copy').addEventListener('click', copyQuestion);
+  $('#btn-bm').addEventListener('click', toggleBm);
   $('#q-text').addEventListener('contextmenu', onTextContextMenu);
   $('#btn-clear').addEventListener('click', clearAns);
   $('#btn-finish').addEventListener('click', askFinish);

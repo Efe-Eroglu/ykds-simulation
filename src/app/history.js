@@ -84,7 +84,7 @@ export function renderSaved() {
   if (!all.length) {
     box.append(h('div', { class: 'empty' },
       h('b', {}, 'Henüz kaydettiğin soru yok'),
-      h('span', { class: 'muted' }, 'Sonuçlarını incelerken bir sorunun yanındaki "Kaydet" düğmesine bastığında burada listelenir.')));
+      h('span', { class: 'muted' }, 'Sınavda ya da sonuçlarını incelerken bir sorunun yanındaki "Kaydet" düğmesine bastığında burada listelenir.')));
     return;
   }
   if (!items.length) { box.append(h('p', { class: 'muted' }, 'Bu modülde kaydettiğin soru yok.')); return; }

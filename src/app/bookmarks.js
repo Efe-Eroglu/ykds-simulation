@@ -22,3 +22,17 @@ export function toggleBookmark(item) {
   }
   return store.set(KEYS.bookmarks, arr) ? idx < 0 : null;
 }
+
+/** Sınav değerlendirildikten sonra, sınav sırasında kaydedilen soruların kopyasını
+ * cevap anahtarı, çözüm ve verilen cevapla günceller. */
+export function refreshBookmarks(testId, qs, answers) {
+  const arr = getBookmarks();
+  let changed = false;
+  for (const b of arr) {
+    if (b.key.slice(0, b.key.lastIndexOf(':')) !== testId || !qs[b.i]) continue;
+    const { mod, question, options, answer, explanation } = qs[b.i];
+    Object.assign(b, { a: answers[b.i] ?? null, q: { mod, question, options, answer, explanation } });
+    changed = true;
+  }
+  if (changed) store.set(KEYS.bookmarks, arr);
+}

@@ -37,12 +37,12 @@ export function reviewItem(q, a, st, title, flagged, bm = null, onBookmarkChange
     h('div', { class: 'rhead' },
       h('b', {}, title),
       h('span', { class: 'tag' }, modById[q.mod]?.name || q.mod),
-      h('span', { class: 'st ' + st }, STATUS_LABEL[st]),
+      q.answer ? h('span', { class: 'st ' + st }, STATUS_LABEL[st]) : h('span', { class: 'tag' }, 'Cevap sınav bitince eklenecek'),
       flagged ? h('span', { class: 'tag' }, '⚑ İşaretli') : null,
       bm ? bookmarkBtn(q, a, bm, onBookmarkChange) : null),
     qt,
     h('div', { class: 'options' }, q.options.map((o, k) => h('div', {
-      class: 'opt' + (LETTERS[k] === q.answer ? ' right' : '') + (a === k && LETTERS[k] !== q.answer ? ' wrongsel' : ''),
+      class: 'opt' + (LETTERS[k] === q.answer ? ' right' : '') + (a === k && q.answer && LETTERS[k] !== q.answer ? ' wrongsel' : ''),
     }, h('span', { class: 'l' }, LETTERS[k]), h('span', { class: 't' }, o)))),
     q.explanation ? h('div', { class: 'expl' }, h('b', {}, 'Çözüm: '), q.explanation) : null);
 }

@@ -200,6 +200,7 @@ tr.own td { font-weight: 650; }
 .bm-btn { margin-left: auto; gap: 6px; color: var(--muted); }
 .bm-btn.on { color: var(--pri); }
 .bm-btn.on svg { fill: currentColor; }
+.qactions .bm-btn { margin-left: 0; }
 .st { font-size: .72rem; font-weight: 700; padding: 3px 9px; border-radius: 99px; }
 .st.right { background: var(--ok-soft); color: var(--ok); } .st.wrong { background: var(--bad-soft); color: var(--bad); } .st.blank { background: var(--warn-soft); color: var(--warn); }
 .expl { margin-top: 8px; padding: 12px 14px; border-radius: var(--r); background: var(--surface-2); border-left: 3px solid var(--pri); font-size: .92rem; white-space: pre-wrap; }
