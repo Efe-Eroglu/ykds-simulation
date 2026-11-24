@@ -8,7 +8,7 @@ import { store, KEYS } from '../lib/store.js';
 import { firebaseConfigured } from '../lib/firebase.js';
 import { listPublishedTests, getTestContent, getSettings, listMyAttempts, errorMessage } from '../services/tests.js';
 import { startSession } from '../services/exam-api.js';
-import { startExam, resumeExam, getSavedSession, discardSession, bindExamEvents, setCopyProtection } from './exam.js';
+import { startExam, resumeExam, getSavedSession, discardSession, bindExamEvents, setCopyProtection, remainingMs } from './exam.js';
 import { bindResultEvents } from './result.js';
 import { renderHistory, bindHistoryEvents } from './history.js';
 import { show } from './view.js';
@@ -205,7 +205,7 @@ async function onStart() {
 function renderResume() {
   const box = $('#resume-box'), ses = getSavedSession();
   if (!ses) { box.classList.add('hidden'); return; }
-  const left = ses.startedAt + EXAM_MINUTES * 60000 - Date.now();
+  const left = remainingMs(ses);
   box.classList.remove('hidden'); box.textContent = '';
   box.append(
     h('div', { class: 'row' }, icon('clock', 20), h('div', {}, h('b', {}, 'Devam eden sınavın var: '), ses.testName,

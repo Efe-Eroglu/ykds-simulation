@@ -14,7 +14,11 @@ let submitting = false;
 let copyProtection = true;
 let allowCopyOnce = false; // Kopyala butonunun execCommand yedeği için
 
-const endsAt = ses => ses.startedAt + EXAM_MINUTES * 60000;
+/** Duraklatılan toplam süre (devam eden duraklama dahil). */
+const pausedTotal = ses => (ses.pausedMs || 0) + (ses.pausedAt ? Date.now() - ses.pausedAt : 0);
+const endsAt = ses => ses.startedAt + EXAM_MINUTES * 60000 + pausedTotal(ses);
+/** Kalan süre (ms); ana sayfadaki "devam et" kutusu da kullanır. */
+export const remainingMs = ses => endsAt(ses) - Date.now();
 
 export const getSavedSession = () => {
   const ses = store.get(KEYS.session);
@@ -70,16 +74,33 @@ function enter() {
   show('exam');
   if (copyProtection) protect(true);
   render(); tick();
+  renderPause();
   clearInterval(timerId);
   timerId = setInterval(tick, 1000);
 }
 
 function tick() {
+  if (!S) return;
   const ms = endsAt(S) - Date.now();
   if (ms <= 0) { clearInterval(timerId); toast('Süre doldu! Sınav otomatik olarak teslim ediliyor.'); finish(); return; }
   const s = Math.floor(ms / 1000), el = $('#timer');
   $('#timer-text').textContent = `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
-  el.classList.toggle('low', ms < 10 * 60000);
+  el.classList.toggle('low', ms < 10 * 60000 && !S.pausedAt);
+}
+
+/* ---------- Süreyi duraklat (öğrenme amaçlı) ---------- */
+function togglePause() {
+  if (busy()) return;
+  if (S.pausedAt) { S.pausedMs = (S.pausedMs || 0) + (Date.now() - S.pausedAt); S.pausedAt = null; }
+  else S.pausedAt = Date.now();
+  persist(); renderPause(); tick();
+  toast(S.pausedAt ? 'Süre duraklatıldı. Devam ettirmek için süreye tekrar dokun.' : 'Süre devam ediyor.');
+}
+function renderPause() {
+  const el = $('#timer'), on = !!(S && S.pausedAt);
+  el.classList.toggle('paused', on);
+  el.setAttribute('aria-pressed', String(on));
+  el.title = on ? 'Süre duraklatıldı, devam ettirmek için tıkla' : 'Süreyi duraklatmak için tıkla';
 }
 
 function render() {
@@ -233,7 +254,9 @@ async function finish() {
   if (submitting || !S) return;
   submitting = true;
   clearInterval(timerId);
-  S.finishedAt = S.finishedAt || Math.min(Date.now(), endsAt(S));
+  if (S.pausedAt) { S.pausedMs = (S.pausedMs || 0) + (Date.now() - S.pausedAt); S.pausedAt = null; }
+  // Kullanılan süre, duraklatılan süre düşülerek kaydedilir.
+  S.finishedAt = S.finishedAt || Math.min(Date.now(), endsAt(S)) - (S.pausedMs || 0);
   persist();
   overlay('busy');
   try {
@@ -279,6 +302,7 @@ export function bindExamEvents() {
   $('#q-text').addEventListener('contextmenu', onTextContextMenu);
   $('#btn-clear').addEventListener('click', clearAns);
   $('#btn-finish').addEventListener('click', askFinish);
+  $('#timer').addEventListener('click', togglePause);
   $('#sub-retry').onclick = () => finish();
   document.addEventListener('keydown', e => {
     if (!S || submitting || $('#view-exam').classList.contains('hidden') || $('#dlg').open || /input|textarea|select/i.test(e.target.tagName)) return;

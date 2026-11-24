@@ -134,6 +134,11 @@ ul.plain { padding-left: 20px; } ul.plain li { margin: 7px 0; }
 .timer { display: inline-flex; align-items: center; gap: 8px; font: 700 1.15rem var(--mono); padding: 6px 14px; border-radius: 10px; background: var(--pri-soft); color: var(--pri); font-variant-numeric: tabular-nums; }
 .timer.low { background: var(--bad-soft); color: var(--bad); animation: pulse 1.6s ease-in-out infinite; }
 @keyframes pulse { 50% { opacity: .65; } }
+button.timer { border: 1.5px solid transparent; cursor: pointer; transition: border-color .15s, background .15s; }
+button.timer:hover { border-color: currentColor; }
+.timer.paused { background: var(--surface-3); color: var(--text-2); border-style: dashed; border-color: currentColor; }
+.timer.paused #timer-text { animation: pulse 1.6s ease-in-out infinite; }
+.timer.paused::after { content: 'Duraklatıldı'; font-size: .7rem; font-weight: 600; }
 .exam-main { max-width: 1160px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: 1fr 290px; gap: 16px; align-items: start; }
 .pal { position: sticky; top: 76px; }
 .pal-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
