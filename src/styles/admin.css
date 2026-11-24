@@ -6,9 +6,9 @@ body.admin { background: var(--bg); }
 .auth { min-height: 100vh; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); }
 .auth-art { position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; padding: 40px 48px; color: #fff; background: #0c0a1f; }
 .auth-art::before { content: ''; position: absolute; inset: 0; background:
-  radial-gradient(600px 400px at 15% 10%, rgba(99, 102, 241, .55), transparent 60%),
-  radial-gradient(500px 420px at 90% 30%, rgba(217, 70, 239, .35), transparent 60%),
-  radial-gradient(520px 420px at 40% 100%, rgba(139, 92, 246, .45), transparent 60%); }
+  radial-gradient(600px 400px at 15% 10%, color-mix(in srgb, var(--acc-500) 55%, transparent), transparent 60%),
+  radial-gradient(500px 420px at 90% 30%, color-mix(in srgb, var(--acc-c) 35%, transparent), transparent 60%),
+  radial-gradient(520px 420px at 40% 100%, color-mix(in srgb, var(--acc-b) 45%, transparent), transparent 60%); }
 .auth-art::after { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255, 255, 255, .05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .05) 1px, transparent 1px); background-size: 44px 44px; mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%); }
 .auth-art > * { position: relative; z-index: 1; }
 .auth-brand { display: flex; align-items: center; gap: 10px; font-weight: 700; }

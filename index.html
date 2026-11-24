@@ -37,23 +37,67 @@
     <button class="btn ghost icon-only theme-toggle" type="button"></button>
   </header>
 
-  <main class="wrap">
-    <div class="hero">
-      <span class="eyebrow"><i data-icon="sparkles" data-size="14"></i> 2026 kılavuzuna uygun</span>
-      <h1>Sınava <em>gerçek koşullarda</em> hazırlan</h1>
-      <p>Alan katsayılı ağırlıklı puanını öğren. Sınav bitince her soruyu çözümüyle incele, yanlışlarını tekrar et.</p>
-      <div class="hero-facts">
-        <span><i data-icon="file" data-size="16"></i> 80 soru</span>
-        <span><i data-icon="clock" data-size="16"></i> 120 dakika</span>
-        <span><i data-icon="chart" data-size="16"></i> Alt test analizi</span>
-        <span><i data-icon="shield" data-size="16"></i> Ücretsiz, kayıt yok</span>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-bg" aria-hidden="true">
+      <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
+      <span class="hero-grid"></span>
+    </div>
+
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <span class="eyebrow reveal" style="--d:0"><span class="eyebrow-dot"></span> 2026 kılavuzuna uygun</span>
+        <h1 id="hero-title" class="reveal" style="--d:1">Sınava <em>gerçek koşullarda</em> hazırlan</h1>
+        <p class="reveal" style="--d:2">Alan katsayılı ağırlıklı puanını öğren. Sınav bitince her soruyu çözümüyle incele, yanlışlarını tekrar et.</p>
+        <div class="hero-cta reveal" style="--d:3">
+          <button id="cta-start" class="btn primary big shine" type="button">Hemen başla <i data-icon="arrowRight" data-size="18"></i></button>
+          <button id="cta-rules" class="btn big glass" type="button"><i data-icon="file" data-size="17"></i> Sınav kuralları</button>
+        </div>
+        <ul class="hero-facts reveal" style="--d:4">
+          <li><i data-icon="chart" data-size="15"></i> Alt test analizi</li>
+          <li><i data-icon="refresh" data-size="15"></i> Yanlış takibi</li>
+          <li><i data-icon="shield" data-size="15"></i> Ücretsiz, kayıt yok</li>
+        </ul>
+      </div>
+
+      <div class="hero-visual reveal" style="--d:2" aria-hidden="true">
+        <div class="mock tilt">
+          <div class="mock-head">
+            <span class="mock-dots"><i></i><i></i><i></i></span>
+            <span class="mock-q">Soru 12 / 80</span>
+            <span class="mock-timer"><i data-icon="clock" data-size="13"></i> 87<b>:</b>42</span>
+          </div>
+          <div class="mock-bar"><i></i></div>
+          <div class="mock-line w90"></div>
+          <div class="mock-line w70"></div>
+          <div class="mock-opts">
+            <span><b>A</b><i class="w60"></i></span>
+            <span><b>B</b><i class="w80"></i></span>
+            <span><b>C</b><i class="w50"></i></span>
+            <span><b>D</b><i class="w70"></i></span>
+          </div>
+        </div>
+        <div class="float-card fc-score">
+          <div class="ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5"/><circle class="ring-val" cx="18" cy="18" r="15.5" pathLength="100"/></svg><b>87</b></div>
+          <div><small>Ağırlıklı puan</small><strong>87,50</strong></div>
+        </div>
+        <div class="float-card fc-coef"><i data-icon="trophy" data-size="16"></i><div><small>Alan katsayısı</small><strong>× 2,25</strong></div></div>
       </div>
     </div>
 
+    <div class="hero-stats">
+      <div class="hs reveal" style="--d:5"><b data-count="80">80</b><span>soru</span></div>
+      <div class="hs reveal" style="--d:6"><b data-count="120">120</b><span>dakika</span></div>
+      <div class="hs reveal" style="--d:7"><b data-count="8">8</b><span>alt test</span></div>
+      <div class="hs reveal" style="--d:8"><b data-count="100">100</b><span>en yüksek puan</span></div>
+    </div>
+  </section>
+
+  <main class="wrap" id="home-main">
     <div id="resume-box" class="card resume hidden"></div>
     <div id="maint-box" class="card hidden"></div>
 
     <nav class="tabs" role="tablist" aria-label="Bölümler">
+      <span class="tab-ind" aria-hidden="true"></span>
       <button class="tab active" data-tab="solve" role="tab" aria-selected="true">Sınava Gir</button>
       <button class="tab" data-tab="results" role="tab" aria-selected="false">Sonuçlarım</button>
       <button class="tab" data-tab="info" role="tab" aria-selected="false">Sınav Kuralları</button>

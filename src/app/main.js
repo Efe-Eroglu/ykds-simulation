@@ -28,8 +28,56 @@ function setTab(name) {
     t.setAttribute('aria-selected', String(on));
   });
   $$('.tabpane').forEach(p => p.classList.toggle('hidden', p.id !== 'tab-' + name));
+  moveTabIndicator();
   if (name === 'results') renderHistory();
   if (name === 'solve') refreshSolved(); // çözülen/silinen sonuçlar yansısın
+}
+
+/** Aktif sekmenin altındaki kayan arka planı konumlar (görünür değilse dokunmaz). */
+function moveTabIndicator() {
+  const tabs = $('.tabs'), ind = $('.tab-ind'), act = $('.tab.active');
+  if (!tabs || !ind || !act || !act.offsetWidth) return;
+  ind.style.width = act.offsetWidth + 'px';
+  ind.style.transform = `translateX(${act.offsetLeft}px)`;
+  tabs.classList.add('ind-ready');
+}
+
+/* ---------- Giriş bölümü ---------- */
+const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function countUp() {
+  if (reducedMotion()) return;
+  $$('.hero-stats [data-count]').forEach((el, i) => {
+    const target = Number(el.dataset.count), dur = 1100, t0 = performance.now() + 400 + i * 80;
+    el.textContent = '0';
+    const step = now => {
+      const p = Math.min(1, Math.max(0, (now - t0) / dur));
+      el.textContent = String(Math.round(target * (1 - Math.pow(1 - p, 3))));
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  });
+}
+
+function goToTab(name) {
+  setTab(name);
+  $('#home-main').scrollIntoView({ behavior: reducedMotion() ? 'auto' : 'smooth', block: 'start' });
+}
+
+function bindHero() {
+  $('#cta-start').addEventListener('click', () => goToTab('solve'));
+  $('#cta-rules').addEventListener('click', () => goToTab('info'));
+  // Hafif fare paralaksı: maket kartı imlece doğru eğilir.
+  const vis = $('.hero-visual'), mock = $('.mock');
+  if (vis && mock && !reducedMotion() && matchMedia('(pointer: fine)').matches) {
+    $('.hero').addEventListener('pointermove', e => {
+      const r = vis.getBoundingClientRect();
+      const x = (e.clientX - (r.left + r.width / 2)) / r.width, y = (e.clientY - (r.top + r.height / 2)) / r.height;
+      mock.style.transform = `rotateY(${-10 + x * 10}deg) rotateX(${6 - y * 8}deg)`;
+    });
+    $('.hero').addEventListener('pointerleave', () => { mock.style.transform = ''; });
+  }
+  countUp();
 }
 
 /* ---------- Site ayarları ---------- */
@@ -181,6 +229,9 @@ function main() {
   hydrateIcons();
   $$('.theme-toggle').forEach(mountThemeToggle);
   $$('.tab').forEach(t => t.addEventListener('click', () => setTab(t.dataset.tab)));
+  window.addEventListener('resize', moveTabIndicator);
+  document.fonts?.ready.then(moveTabIndicator);
+  bindHero();
   $('#btn-refresh').addEventListener('click', loadTests);
   $('#btn-start').addEventListener('click', onStart);
   bindExamEvents();
