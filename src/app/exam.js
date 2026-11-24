@@ -8,13 +8,13 @@ import { saveAttempt } from './attempts.js';
 import { openAttempt } from './result.js';
 import { show } from './view.js';
 import { icon } from '../ui/icons.js';
+import { copyText, questionText, isProgrammaticCopy } from '../ui/clipboard.js';
 import { bookmarkKey, isBookmarked, toggleBookmark, refreshBookmarks } from './bookmarks.js';
 
 let S = null;          // aktif sınav oturumu
 let timerId = null;
 let submitting = false;
 let copyProtection = true;
-let allowCopyOnce = false; // Kopyala butonunun execCommand yedeği için
 
 /** Duraklatılan toplam süre (devam eden duraklama dahil). */
 const pausedTotal = ses => (ses.pausedMs || 0) + (ses.pausedAt ? Date.now() - ses.pausedAt : 0);
@@ -58,7 +58,7 @@ export function resumeExam(ses) {
 /* ---------- Kopya koruması ---------- */
 const blockEvt = e => {
   if (!S || $('#view-exam').classList.contains('hidden')) return;
-  if (e.type === 'copy' && allowCopyOnce) return;
+  if (e.type === 'copy' && isProgrammaticCopy()) return;
   // Vurgulama için soru metninde seçim yapılabilir (kopyalama yine engelli).
   const t = e.target.nodeType === 3 ? e.target.parentNode : e.target;
   if (e.type === 'selectstart' && t && t.closest && t.closest('#q-text')) return;
@@ -240,17 +240,7 @@ function toggleBm() {
 /* ---------- Soruyu kopyala ---------- */
 async function copyQuestion() {
   if (!S) return;
-  const q = S.qs[S.idx];
-  const opts = q.options.map((o, k) => `${LETTERS[k]}) ${o}`).join('\n');
-  const text = `${String(q.question).trim()}\n\n${opts}`;
-  let ok = false;
-  try { await navigator.clipboard.writeText(text); ok = true; } catch {
-    const ta = h('textarea', { style: 'position:fixed;opacity:0;top:0;left:0', readonly: true });
-    ta.value = text; document.body.append(ta); ta.select();
-    allowCopyOnce = true;
-    try { ok = document.execCommand('copy'); } catch { ok = false; }
-    allowCopyOnce = false; ta.remove();
-  }
+  const ok = await copyText(questionText(S.qs[S.idx]));
   toast(ok ? 'Soru ve şıklar panoya kopyalandı.' : 'Kopyalanamadı; tarayıcı panoya erişime izin vermedi.', ok ? '' : 'error');
 }
 

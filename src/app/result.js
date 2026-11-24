@@ -2,6 +2,7 @@ import { MODULES, LETTERS, modById } from '../core/exam-config.js';
 import { buildQuestions, computeScore, statusOf, coefOf, totals } from '../core/scoring.js';
 import { $, $$, h, renderRich, f2, toast } from '../ui/dom.js';
 import { icon } from '../ui/icons.js';
+import { copyText, questionText } from '../ui/clipboard.js';
 import { bookmarkKey, isBookmarked, toggleBookmark } from './bookmarks.js';
 import { show } from './view.js';
 
@@ -30,6 +31,16 @@ function bookmarkBtn(q, a, bm, onChange) {
   return btn;
 }
 
+function copyBtn(q) {
+  const btn = h('button', { type: 'button', class: 'btn small ghost copy-btn', title: 'Soruyu şıklarıyla birlikte panoya kopyala' },
+    icon('copy', 15), 'Kopyala');
+  btn.addEventListener('click', async () => {
+    const ok = await copyText(questionText(q));
+    toast(ok ? 'Soru ve şıklar panoya kopyalandı.' : 'Kopyalanamadı; tarayıcı panoya erişime izin vermedi.', ok ? '' : 'error');
+  });
+  return btn;
+}
+
 export function reviewItem(q, a, st, title, flagged, bm = null, onBookmarkChange = null) {
   const qt = h('div', { class: 'rich' });
   renderRich(qt, q.question);
@@ -39,6 +50,7 @@ export function reviewItem(q, a, st, title, flagged, bm = null, onBookmarkChange
       h('span', { class: 'tag' }, modById[q.mod]?.name || q.mod),
       q.answer ? h('span', { class: 'st ' + st }, STATUS_LABEL[st]) : h('span', { class: 'tag' }, 'Cevap sınav bitince eklenecek'),
       flagged ? h('span', { class: 'tag' }, '⚑ İşaretli') : null,
+      copyBtn(q),
       bm ? bookmarkBtn(q, a, bm, onBookmarkChange) : null),
     qt,
     h('div', { class: 'options' }, q.options.map((o, k) => h('div', {

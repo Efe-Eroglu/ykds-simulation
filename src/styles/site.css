@@ -197,7 +197,9 @@ tr.own td { font-weight: 650; }
 .ritem { border-top: 1px solid var(--line); padding: 18px 0; }
 .ritem:first-child { border-top: 0; }
 .rhead { display: flex; gap: 8px; align-items: center; margin-bottom: 10px; flex-wrap: wrap; }
+.copy-btn { margin-left: auto; gap: 6px; color: var(--muted); }
 .bm-btn { margin-left: auto; gap: 6px; color: var(--muted); }
+.copy-btn + .bm-btn { margin-left: 0; }
 .bm-btn.on { color: var(--pri); }
 .bm-btn.on svg { fill: currentColor; }
 .qactions .bm-btn { margin-left: 0; }
