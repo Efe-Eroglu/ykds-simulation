@@ -3,6 +3,7 @@ import { isValidContent } from '../core/split.js';
 import { $, $$, h, toast, confirmDlg, fmtDate, f2 } from '../ui/dom.js';
 import { hydrateIcons, icon } from '../ui/icons.js';
 import { mountThemeToggle } from '../ui/theme.js';
+import { mountSettingsToggle } from '../ui/reading.js';
 import { store, KEYS } from '../lib/store.js';
 import { firebaseConfigured } from '../lib/firebase.js';
 import { listPublishedTests, getTestContent, getSettings, listMyAttempts, errorMessage } from '../services/tests.js';
@@ -228,6 +229,7 @@ function goHome(tab = 'solve') {
 function main() {
   hydrateIcons();
   $$('.theme-toggle').forEach(mountThemeToggle);
+  $$('.settings-toggle').forEach(mountSettingsToggle);
   $$('.tab').forEach(t => t.addEventListener('click', () => setTab(t.dataset.tab)));
   window.addEventListener('resize', moveTabIndicator);
   document.fonts?.ready.then(moveTabIndicator);

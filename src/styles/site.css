@@ -153,12 +153,13 @@ ul.plain { padding-left: 20px; } ul.plain li { margin: 7px 0; }
 .qmeta .qactions { margin-left: auto; display: flex; gap: 8px; }
 .btn.flagged { background: var(--warn-soft); border-color: var(--warn); color: var(--warn); }
 .qtext, .rich { white-space: pre-wrap; word-wrap: break-word; font-size: 1.02rem; line-height: 1.65; }
+.qtext { font-size: calc(1.02rem * var(--q-scale, 1)); }
 .qtext pre, .rich pre { background: var(--surface-2); border: 1px solid var(--line); padding: 12px; border-radius: 10px; overflow: auto; font: .84rem/1.5 var(--mono); white-space: pre; }
 .options { display: grid; gap: 8px; margin: 18px 0; }
 .opt { display: flex; gap: 12px; align-items: flex-start; text-align: left; font: inherit; color: inherit; border: 1.5px solid var(--line); background: var(--surface); border-radius: var(--r); padding: 11px 14px; cursor: pointer; width: 100%; transition: border-color .15s, background .15s; }
 .opt:hover { border-color: var(--line-strong); background: var(--surface-2); }
 .opt .l { display: inline-grid; place-items: center; flex: none; width: 26px; height: 26px; border-radius: 8px; background: var(--surface-2); border: 1px solid var(--line); font-weight: 700; font-size: .82rem; }
-.opt .t { white-space: pre-wrap; word-break: break-word; padding-top: 2px; }
+.opt .t { white-space: pre-wrap; word-break: break-word; padding-top: 2px; font-size: calc(1rem * var(--q-scale, 1)); }
 .opt.struck .t { text-decoration: line-through; text-decoration-thickness: 2px; }
 .opt.struck { opacity: .5; }
 .opt.struck.sel { opacity: .8; }
